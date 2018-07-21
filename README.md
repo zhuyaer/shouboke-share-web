@@ -12,9 +12,9 @@
 
 ### 使用技术
 
-页面交互: HTML + CSS + JS + zepto.js + frozenui
-分享和支付：微信、QQ、微信 SDK
-视频观看：jwplayer
-实时提问、发言: websocket (mqtt.js库)
+1. 页面交互: HTML + CSS + JS + zepto.js + frozenui
+2. 分享和支付：微信、QQ、微信 SDK
+3. 视频观看：jwplayer
+4. 实时提问、发言: websocket (mqtt.js库)
 
 
