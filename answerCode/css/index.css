@@ -1,0 +1,77 @@
+#main{
+    width: 6.9rem;
+    margin-top: 2.7rem;
+    margin-left: .3rem;
+    background-color: #FFFFFF;
+    border-radius: .2rem;
+}
+
+#title{
+    padding-top: .5rem;
+}
+
+#title h5{
+    text-align: center;
+    color: #010101;
+}
+
+#title h5:first-of-type{
+    font-size: .34rem;
+}
+
+#tilte h5:nth-of-type(2) {
+    font-size: .24rem;
+}
+
+.inputItem{
+    width: 6.1rem;
+    margin-left: .7rem;
+    margin-top: .1rem;
+}
+
+.inputItem>span{
+    color: #000000;
+    font-size: .3rem;
+}
+
+.inputItem>input{
+    width: 4.5rem;
+    height: .6rem;
+    border-radius: .3rem;
+    font-size: .26rem;
+    margin-left: .1rem;
+}
+
+.inputItem>input::placeholder{
+    color: #B3B3B3;
+}
+
+#input{
+    margin-top: 1rem;
+}
+
+#getCode{
+    width: 2.4rem;
+    height: .6rem;
+    border-radius: .3rem;
+    margin-left: 2.25rem;
+    background-color: #47C525;
+    color: #FEFEFE;
+    margin-bottom: 1rem;
+}
+
+.mui-toast-container{
+    bottom: 250px;
+}
+
+body{
+    background-image: url("../img/H5_answer_bg.png");
+    background-size: contain;
+    padding: 0;
+    margin: 0;
+    background-repeat: no-repeat;
+}
+
+.mui-content{
+    background-color: transparent;
+}

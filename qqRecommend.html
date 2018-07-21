@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <title>精彩预告</title>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+    <link rel="stylesheet" href="./dist/css/frozen.css"/>
+    <link rel="stylesheet" href="dist/css/index.css"/>
+    <link rel="stylesheet" href="dist/css/dropload.css">
+    <script src="./dist/lib/zepto.min.js"></script>
+    <script src="./dist/js/frozen.js"></script>
+    <script src="./dist/js/dropload.min.js"></script>
+</head>
+
+<body ontouchstart>
+<header>
+    <div class="ui-searchbar-wrap ui-border-b">
+        <div class="ui-searchbar ui-border-radius">
+            <i class="ui-icon-search"></i>
+            <div class="ui-searchbar-text">搜索课程关键字</div>
+            <div class="ui-searchbar-input"><input value="" type="text" placeholder="搜索课程关键字" autocapitalize="off"></div>
+            <i class="ui-icon-close"></i>
+        </div>
+        <button class="ui-searchbar-cancel">取消</button>
+    </div>
+</header>
+<section>
+    <div id="nothing">
+        <img src="./dist/img/img_wuya.png"/>
+        <p>嗨呀～这里还什么都没有～</p>
+    </div>
+    <ul class="ui-list ui-border-tb stream">
+        <!--两个为一单元-->
+        <!--<li class="streamBg">-->
+            <!--<span>预告</span>-->
+            <!--<img src="dist/img/bg.jpg"/>-->
+        <!--</li>-->
+        <!--<li class="streamInfo">-->
+            <!--<div class="ui-avatar">-->
+                <!--<span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>-->
+            <!--</div>-->
+            <!--<div class="ui-list-info">-->
+                <!--<h4 class="ui-nowrap">姓名<span class="date">2016-10-13 11:01</span></h4>-->
+                <!--<p class="ui-nowrap">用户描述在这里啊啊啊啊</p>-->
+            <!--</div>-->
+        <!--</li>-->
+    </ul>
+</section>
+</body>
+<script type="text/javascript">
+    (function($){
+        var Page = {
+            // commonUrl:"http://api-sbkt.lycam.tv/",
+            commonUrl:'http://sbkt-port-1178495353.cn-north-1.elb.amazonaws.com.cn/',
+            forDetailVideo:"https://open.weixin.qq.com/connect/oauth2/authorize?" +
+            "appid=wx18e63e75d50cb458&redirect_uri=http://shouboke.tv/shareModel/index.html" +
+            "&response_type=code&scope=snsapi_base&state=",
+            qqUrl:'http://shouboke.tv/weChat_web_develop/qqIndex.html?state=',
+            page:1,
+            perPageCount:5,
+            forData:"",
+            timer:null,
+            init : function(){
+                var _this=this;
+                _this.dataObj=JSON.parse(sessionStorage.getItem('dataJsonSession'));
+                _this.category=sessionStorage.getItem('category');
+                $(".stream").html('');
+                _this.page=1;
+                $(".dropload-down")&&$(".dropload-down").remove()
+                //下拉刷新
+                $('section').dropload({
+                    scrollArea : window,
+                    domDown : {
+                        domClass   : 'dropload-down',
+                        domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                        domNoData  : '<div class="dropload-noData">最后一页啦</div>'
+                    },
+                    loadDownFn : function(me){
+                        _this.getData(me)
+                    }
+                });
+            },
+            getData : function(me){
+                var _this=this;
+                var url=_this.commonUrl+'/v4/stream/relatedStreams?page='+_this.page+'&resultsPerPage='+_this.perPageCount+'&userid='+_this.dataObj.userid+'&category='+_this.category;
+                $.ajax({
+                    type:'GET',
+                    url:url,
+                    headers: {
+                        Authorization: "Bearer " + _this.dataObj.token
+                    },
+                    success:function(data){
+                        console.log("data",data)
+                        var count=data.count
+                        var data=data.items;
+                        if(data.length==0){
+                            $(".dropload-load").remove();
+                            $("#nothing").show();
+                        }else{
+                            $("#nothing").hide();
+                            var opt='';
+                            for(var i=0;i<data.length;i++){
+                                opt+='<li class="streamBg">'+
+                                '<span>预告</span>'+
+                                '<a href="'+_this.qqUrl+data[i].streamId+'"><img src="'+data[i].thumbnailUrl+'"/></a>'+
+                                '</li><li class="streamInfo">'+
+                                '<div class="ui-avatar">'+
+                                '<span style="background-image:url('+data[i].user.avatarUrl+')"></span>'+
+                                '</div><div class="ui-list-info">'+
+                                '<h4 class="ui-nowrap">'+data[i].title+'<small class="date">'+data[i].startTime+'</small></h4>'+
+                                '<p class="ui-nowrap">'+_this.getUser(data[i])+'</p>'+
+                                '</div></li>'
+                                if(i+1>=data.length&&parseInt(_this.page*_this.perPageCount)>=count){
+                                    // 锁定
+                                    me.lock();
+                                    me.noData();
+                                    break;
+                                }
+                            }
+
+                            $(".stream").append(opt);
+                            _this.page+=1;
+                            me.resetload();
+                            _this.bindEvent();
+                        }
+                    },
+                    error:function(error){
+                        console.log("error",error)
+                        //$(".dropload-load").remove()
+                        me.resetload()
+                    }
+                });
+            },
+            getUser:function(data){
+                if(data.team){
+                    return "["+data.team+"]-"+data.user.displayName
+                }else{
+                    return data.user.displayName
+                }
+            },
+            bindEvent : function(){
+                var _this = this;
+                $('.ui-searchbar').off().tap(function(){
+                    $('.ui-searchbar-wrap').addClass('focus');
+                    $('.ui-searchbar-input input').focus();
+                });
+                $('.ui-searchbar-cancel').off().tap(function(){
+                    $('.ui-searchbar-wrap').removeClass('focus');
+                });
+                $(".ui-searchbar .ui-searchbar-input input").off().keyup(function(e){
+                    _this.forData = $(".ui-searchbar-input input").val();
+                    clearTimeout(_this.timer)
+                    _this.timer = setTimeout(function(){
+                        Page.init()
+                    },200)
+
+                });
+            }
+        };
+        $(function(){
+            Page.timer = setTimeout(function(){
+                Page.init()
+            },100)
+        })
+    })(Zepto)
+
+</script>
+</html>

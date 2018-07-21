@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html manifest="IGNORE.manifest">
+	<head>
+		<meta name="viewport"  content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="utf-8">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		<title>系列课程</title>
+		<link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+		<link rel="stylesheet" href="../css/seriesList.css" />
+		<link rel="stylesheet" href="../css/description.css" />
+		<link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
+   		<link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/icon-full.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="block" style="display: none;" class="mui-content">
+			<div id="coverImg">
+				<img src="">
+			</div>
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#catalog">
+						目录
+					</a>
+					<a class="mui-control-item" href="#details">
+						详情
+					</a>
+				</div>
+				<div class="mui-slider-group">
+					<div id="details" class="mui-slider-item mui-control-content">
+						<div id="scroll1" class="mui-scroll-wrapper" data-scroll="1">
+							<div class="mui-scroll" style="transform: translate3d(0px, 0px, 0px) translateZ(0px);">
+								<div id="info">
+									<div id="uInfo">
+										<div id="headImg">
+											<img src="">
+										</div>
+										<div id="userName">
+											西南第一帅
+										</div>
+										<div id="classPrice">
+											¥666
+										</div>
+									</div>
+								</div>
+								<p id='title'>hffhwnfw</p>
+								<div id='classInfo'>
+									<div>课时：20节</div>
+									<div>分类：教育</div>
+									<div id="numCuont">报名人数：1200</div>
+								</div>
+								<div id="description">
+									<div style="padding-left:.15rem;">课程描述</div>
+									<div id='desContent'>this is description</div>
+								</div>
+							</div>
+						<div class="mui-scrollbar mui-scrollbar-vertical"><div class="mui-scrollbar-indicator" style="transition-duration: 0ms; display: block; height: 52px; transform: translate3d(0px, 0px, 0px) translateZ(0px);"></div></div></div>
+					</div>
+					<div id="catalog" class="mui-slider-item mui-control-content mui-active">
+						<div  id="refreshContainer" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+<!-- 								<div class="list-wrapper"> -->
+									<ul class="mui-table-view">
+								
+									</ul>
+								<!-- </div>	 -->
+							</div>
+	<!-- 					<div class="mui-scrollbar mui-scrollbar-vertical"><div class="mui-scrollbar-indicator" style="transition-duration: 0ms; display: block; height: 52px; transform: translate3d(0px, 0px, 0px) translateZ(0px);"></div></div></div> -->
+					</div>
+				</div>
+			</div>
+			<div style="width:100%;height:.7rem;background-color:#f8f8f8;">
+			</div>
+			<div id="bottom">
+				<div id="bottomLeft">
+					<span>价格：</span>
+					<span id="price">¥998</span>
+				</div>
+				<div id="bottomRight">
+					报名
+				</div>
+			</div>
+		</div>
+	</div>
+		<div id="isPassword">
+			<h4>密码课验证</h4>
+			<input type="password" placeholder="请输入课程密码">
+			<button class="mui-btn" id="login">登录</button>
+			<h5 style="padding:0 15px;line-height:25px;text-align:center">该课程为密码课程，请输入密码验证是否有观看权限</h5>
+		</div>
+		<div id="isTeam">
+			<h3>登录</h3>
+			<form class="mui-input-group">
+    			<div class="mui-input-row">
+    				<input id="phoneNum" type="text" class="mui-input-clear" placeholder="请输入用户名">
+    			</div>
+    			<div class="mui-input-row">
+        			<input id="password" type="password" class="mui-input-password" placeholder="请输入密码">
+    			</div>
+    			<div class="mui-input-row mui-radio">
+					<label>记住密码</label>
+					<input id="remPwd" name="radio1" type="radio">
+				</div>
+    			<div class="mui-button-row">
+        			<button id="login" type="button" class="mui-btn mui-btn-primary" >登录</button>
+    			</div>
+			</form>
+		</div>
+		<div id="card">
+        	<h5>先到先得</h5>
+        	<div id="coupon">
+            	10元优惠券
+        	</div>
+        	<h4>邀请函专属优惠券</h4>
+        	<div style="position: relative;width: 1rem;margin: 0 auto">
+            	<s id="original">998</s>
+        	</div>
+        	<div id="present">
+            	<span>现价:¥</span>
+            	<span>666</span>
+        	</div>
+        	<div id="buyNow">
+            	立即抢购
+        	</div>
+        	<div id="prompt">
+            	优惠券15分钟后失效
+        	</div>
+        	<div id="cardClose" onclick="cardClose()">
+        	</div>
+    	</div>
+    	<div id="zz">
+
+    	</div>
+    	<div id="downTips">
+    		<img src="../img/downLogo.png" alt=""/>
+    		<p>下载个APP呗～～</p>
+    		<p>可以更方便的观看直播哦</p>
+    		<div id="download">去下载</div>
+    		<div id="downClose">
+        		<img src="../img/downClose.png" alt=""/>
+   	 		</div>
+		</div>
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+		<script src="https://cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/common.js"></script>
+		<script type="text/javascript" src="../js/seriesList.js"></script>
+	</body>
+</html>

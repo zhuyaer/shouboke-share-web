@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport"  content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="utf-8">
+		<title>支付宝支付</title>
+		<link rel="stylesheet" href="../css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/payInformation.css"/>
+		<link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
+   		<link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/icon-full.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="block" style="display: none;">
+		<!--<header id="header" class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">支付信息</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		</header>-->
+		<div class="mui-content">
+			<div id="mainInfo">
+				<div id="videoCover">
+					<img src="" alt="" />
+				</div>
+				<div id="infoRight">
+					<div id="videoTitle">
+					</div>
+					<div id="infoBottom">
+						<div id="userHead">	
+							<img src="" alt="" />
+						</div>
+						<div id="userName">
+						</div>
+						<div id="price">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="perfectInfo" class="mui-input-group">
+				    <div class="mui-input-row">
+        					<label>完善信息 </label>
+    					</div>
+   					 <!--<div class="mui-input-row">-->
+        					<!--<label>姓名</label>-->
+        					<!--<input id="name" v-model="uname" type="text"  placeholder="请输入姓名">-->
+    					<!--</div>-->
+    					<div class="mui-input-row">
+        					<label>电话</label>
+        					<input id="tel" onblur="mui('#getCode')[0].style.color='#757887';" type="text" placeholder="请输入您的联系电话">
+    					</div>
+   					 <div class="mui-input-row">
+        					<label id="getCode" onclick="getIdentifyCode()">获取验证码</label>
+        					<input id="code" type="text" placeholder="短信验证码">
+    					</div>
+			</div>
+			<div id="stateMent">
+				<p>根据国家相关规定，直播及评论需要实名制，不便之处敬请谅解</p>
+				<!--<p>您的信息我们会严格保密不会泄露给任何第三方</p>-->
+			</div>
+			<div id="choosePayType" class="mui-input-group">
+				<div class="mui-input-row">
+					<label>支付方式 </label>
+				</div>
+				<div class="mui-input-row mui-radio">
+					<img src="../img/WeChatPay.png" alt="" />
+					<label>微信支付</label>
+					<input name="payType" checked="checked" value="wx" type="radio">
+				</div>
+				<!--<div class="mui-input-row mui-radio">
+					<img src="../img/Alipay.png" alt="" />
+					<label>支付宝支付</label>
+					<input name="payType" checked="checked" value="zfb" type="radio">
+				</div>-->
+			</div>
+			<div class="space">
+			</div>
+			<div id="pay">
+				<div id="payLeft">
+					<span>实付:</span>
+					<span id="realPay"></span>
+				</div>
+				<div id="payRight" onclick="payClick()">立即支付</div>
+			</div>
+		</div>
+		</div>
+	<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<script src="https://cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+	<script src="../js/common.js"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script src="../js/alipay.js"></script>
+	</body>
+</html>
+<!--https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx18e63e75d50cb458&redirect_uri=http://shouboke.tv%2fweChat_web_develop%2fclass%2fhtml%2fpayInformation.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect-->

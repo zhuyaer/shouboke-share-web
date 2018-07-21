@@ -1,0 +1,278 @@
+*{
+	font-family: '.PingFangSC-Regular';
+}
+
+#header .mui-title{
+	font-size: .17rem;
+	color: #030303;
+}
+
+#mainInfo{
+	width: 100%;
+	height: 1.2rem;
+	background-color: #ffffff;
+}
+
+#videoCover{
+	float: left;
+	width: 1.6rem;
+	height: .9rem;
+	margin-top: .15rem;
+	margin-left: .1rem;
+}
+
+#videoCover>img{
+	width: 100%;
+	height: 100%;
+}
+
+#infoRight{
+	margin-left: .1rem;
+	margin-top: .15rem;
+	width: 1.86rem;
+	float: left;
+	height: .9rem;
+}
+
+#videoTitle{
+	width: 1.86rem;
+	height: .4rem;
+	font-size: .14rem;
+	color: #393939;
+	margin-top: .08rem;
+}
+
+#infoBottom{
+	width: 1.86rem;
+	height: .3rem;
+	margin-top: .1rem;
+}
+
+#userHead,#userName,#price{
+	height: .3rem;
+	float:left ;
+	line-height: .3rem;
+}
+
+#userHead{
+	width: .3rem;
+	border-radius: .15rem;
+	overflow: hidden;
+}
+
+#userHead>img{
+	width: 100%;
+	height: 100%;
+}
+
+#userName,#price{
+	margin-left: .1rem;
+	font-size: .15rem;
+}
+
+#price{
+	/*font-size: .12rem;*/
+	color: #d0021b;
+	font-size: .17rem;
+}
+
+#perfectInfo{
+	width: 100%;
+	/*height: 1.78rem;*/
+	margin-top: .2rem;
+}
+
+#perfectInfo .mui-input-row{
+	height: .445rem;
+}
+
+#perfectInfo .mui-input-row>input{
+	text-align: right;
+	width: 65%;
+	font-size: .15rem;
+}
+.mui-input-row label{
+	font-size: .15rem;
+}
+
+#perfectInfo #password{
+	text-align: left;
+}
+#perfectInfo #password::placeholder{
+	text-align: left;
+}
+.splitLine{
+	height: 8px;
+	background-color: #F0F2F5;
+}
+
+#getCode{
+	float: right;
+	text-align: right;
+	/*color: #b3aaaa;*/
+	font-size: .14rem;
+}
+
+#perfectInfo #code{
+	text-align: left;
+	padding-left: 15px;
+}
+
+#stateMent{
+	padding-left: .1rem;
+	padding-top: .12rem;
+    background-color: #fafafc;
+}
+
+#stateMent>p:first-of-type{
+	font-size: .13rem;
+	color: #aaaaaa;
+	width: 3.4rem;
+}
+
+#stateMent>p:nth-of-type(2){
+	font-size: .13rem;
+}
+
+#stateMent{
+	width: 100%;
+	height: .6rem;
+}
+
+#choosePayType{
+	height: 1.02rem;
+	width: 100%;
+	margin-top: .2rem;
+}
+
+#choosePayType img{
+	width: .3rem;
+	height: .3rem;
+	float: left;
+	margin-left: .2rem;
+	margin-top: .13rem;
+}
+
+#choosePayType .mui-input-row{
+	height: .56rem;
+}
+
+#choosePayType .mui-input-row>label{
+	height: .56rem;
+	line-height: .26rem;
+	width: 3.25rem;
+}
+
+#choosePayType .mui-input-row:first-of-type{
+	height: .46rem;
+}
+
+#choosePayType .mui-input-row:first-of-type>label{
+	height: .46rem;
+	line-height: .24rem;
+}
+
+.mui-checkbox input[type=checkbox], .mui-radio input[type=radio]{
+	top:.12rem;
+}
+
+.mui-input-group label{
+	color: #757887;
+}
+
+#pay{
+	height: .64rem;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	background-color: #fafaff;
+}
+
+#payLeft{
+	width: 2.65rem;
+	height: .64rem;
+	float: left;
+	background-color: #fafaff;
+}
+
+#payLeft>span{
+	margin-left: .2rem;
+	line-height: .64rem;
+	font-size: .18rem;
+	color: #AAAAAA;
+}
+
+#payLeft>span:nth-of-type(2){
+	color: #D0021B;	
+	font-size: .2rem;
+}
+
+#payRight{
+	width: 1.1rem;
+	height: .64rem;
+	background-color: #14C864;
+	float: right;
+	text-align: center;
+	line-height: .64rem;
+	color: #FFFFFF;
+}
+
+.space{
+	width: 100%;
+	height: .7rem;
+	background-color: #fff;
+}
+
+.disabled{
+  pointer-events: none;
+}
+
+.mui-radio input[type=radio]{
+	width: .15rem;
+	height: .15rem;
+}
+
+.mui-input-group .mui-input-row:after,.mui-input-group:after,.mui-input-group:before{
+	background-color: #F2F2F2;
+}
+
+#payLeft{
+}
+
+#oldPrice,#coupon{
+	text-align: right;
+	color: #C30016;
+}
+
+#countDown,#couponInfo{
+	display: none;
+}
+
+.mui-toast-container{
+	bottom: 250px;
+}
+        #countDown{
+            width: 3.75rem;
+            height: .44rem;
+            background-color: #FFDEA4;
+            font-size: .15rem;
+            line-height: .44rem;
+            letter-spacing: .01rem;
+        }
+        #countDown>span:first-of-type{
+            margin-left: .1rem;
+        }
+        #countDown>span:nth-of-type(2){
+            color: #C5001B;
+        }
+        #closeCount{
+            width: .26rem;
+            height: .26rem;
+            margin-top: .09rem;
+            float: right;
+            margin-right: .1rem;
+            background-image: url("../img/closeCount.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }

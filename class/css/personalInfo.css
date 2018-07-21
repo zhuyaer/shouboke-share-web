@@ -1,0 +1,73 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+#userInfo .mui-input-row input{
+	text-align: right;
+	font-size: .15rem;
+}
+
+#userInfo .mui-input-row:first-of-type{
+	height: .64rem;
+}
+
+#userInfo .mui-input-row:first-of-type label{
+	height: .64rem;
+	line-height: .64rem;
+	padding-top: 0;
+}
+
+#userInfo .mui-input-row:first-of-type>div{
+	float: right;
+	margin-right: 15px;
+	margin-top: 7px;
+}
+
+#userInfo .mui-input-row:first-of-type img{
+	width: .4rem;	
+	height: .4rem;
+	border-radius: 50%;
+	border:1px solid #f2f2f2;
+	overflow: hidden;
+	float: right;
+}
+
+.mui-input-group .mui-input-row:after{
+	background-color: #F2F2F2;
+}
+
+#camera{
+	height: 50px;
+	opacity: 0;
+}
+
+#submit{
+	width: 3.55rem;
+	margin: 1rem .1rem;
+	background-color: #14c854;
+	color: #f2f2f2;
+	height:.44rem;
+	font-size: .17rem;
+	border: none;
+}
+
+.mui-toast-container{
+	bottom: 250px;
+}
+
+#headImg{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 60%;
+}
+
+.mui-input-group>.mui-input-row:first-of-type{
+	position: relative;
+}
+
+
+.mui-input-group:after{
+	height: 0;
+}

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>手播课</title>
+    <link rel="stylesheet" href="frozenui/css/frozen.css"/>
+    <link rel="stylesheet" href="assets/css/index.css"/>
+    <link rel="stylesheet" href="assets/css/description.css"/>
+    <link rel="stylesheet" href="assets/css/psdInput.css"/>
+</head>
+<body ontouchstart>
+<div id="contentBox" class="show">
+    <div id="getAcross">
+    <header class="ui-header ui-border-b">
+        <p class="ui-txt-white"><a class="ui-txt-white" href="http://a.app.qq.com/o/simple.jsp?pkgname=tv.lycam.pclass">点击下载手播课</a>
+            <span class="police"></span>
+            <span class="peopleCount">0</span>
+            <span class="dialogue">0</span>
+        </p>
+    </header>
+    <span class="logo"></span>
+
+    <!--发言输入-->
+    <div id="sendInfoBox">
+        <section class="ui-input-wrap" style="background:#484d58">
+            <div class="question">问</div>
+            <div class="ui-input ui-border-radius">
+                <input type="text" id="msgInfo" name="" value="" placeholder="我也说一句...">
+            </div>
+            <button class="ui-btn sendInfo">评论</button>
+        </section>
+    </div>
+
+    <!--付费通道-->
+    <div class="ui-dialog" id="payMoney">
+        <div class="ui-dialog-cnt">
+            <header class="ui-dialog-hd ui-border-b">
+                <h3>开通课程</h3>
+                <i class="ui-dialog-close cancelPay" data-role="button"></i>
+            </header>
+            <div class="ui-dialog-bd" style="padding-top: 0">
+                <h4>标题标题</h4>
+                <div>仅需付费<span class="moneyCount">0</span>元，即可报名观看！</div>
+            </div>
+            <div class="ui-dialog-ft">
+                <button type="button" data-role="button" class="cancelPay">取消</button>
+                <button type="button" data-role="button" id="webChatPay">去支付</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="ui-container">
+        <section id="tab">
+            <div class="demo-item">
+                <!--视频栏live-over-->
+                <div class="videoTab live_playBack">
+                    <div id="videoBox">
+                        <video webkit-playsinline playsinline id="video" controls="controls" poster="http://shouboke.tv/weChat_web_develop/assets/img/poster.png" src=""></video>
+                        <!--<img class="playBtn" src="img/play.png" alt="play/pause"/>-->
+                        <div class="poster">
+                            <img class="live_playBackPoster" src="http://shouboke.tv/weChat_web_develop/assets/img/poster.png"/>
+                        </div>
+                    </div>
+                    <div class="road liveLine">
+                        <span class="chooseImg active"></span><span class="road1">线路一</span>
+                        <span class="chooseImg"></span><span class="road2">线路二</span>
+                    </div>
+                </div>
+                <!--视频栏ready-->
+                <div class="videoTab readyV">
+                    <div class="poster">
+                        <img class="readyposter" src="assets/img/poster.png"/>
+                    </div>
+                    <p class="timeTip">距开播仅剩：</p>
+                    <div id="time"></div>
+                    <div class="delayTip">等候开播中...</div>
+                </div>
+
+                <div class="demo-block">
+                    <div class="ui-tab">
+                        <ul class="ui-tab-nav ui-border-b" style="background: #191919">
+                            <li class="chatRoom">聊天室</li>
+                            <li class="current">内容介绍</li>
+                        </ul>
+                        <ul class="ui-tab-content"  id="infobox">
+                            <li>
+                                <ul class="infoBox ui-list">
+                                    <!--<li class="streamInfo">-->
+                                    <!--<div class="ui-avatar-s">-->
+                                    <!--<span style="background-image:url(http://placeholder.qiniudn.com/80x80)"></span>-->
+                                    <!--</div>-->
+                                    <!--<div class="ui-list-info">-->
+                                    <!--<h4 class="ui-nowrap">Ywen*<small class="date">2016-11-23 11:30</small></h4>-->
+                                    <!--<div>hwdisajnxojqwdiuhwudjskasjdxosdodmosadxsk,pdkjwoei,xlkmokdc11</div>-->
+                                    <!--</div>-->
+                                    <!--</li>-->
+                                </ul>
+                            </li>
+                            <li class="show">
+                                <ul class="courseDesc">
+                                    <li class="clearfix">
+                                        <div class="ititle"><img src="assets/img/icon_title.png"/></div>
+                                        <div>
+                                            <h5>课程标题：<span class="courseTitle">课程标题</span></h5>
+                                            <h5>已有<span class="subscribeCount greenPoint">20人</span>报名</h5>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="itime"><img src="assets/img/icon_time.png"/></div>
+                                        <div>
+                                            <h5>开课时间：<span class="startTime">2016-11-12 11:12</span></h5>
+                                            <h5>时长：<span class="duration greenPoint">2h</span></h5>
+                                        </div>
+                                    </li>
+                                    <li class="clearfix">
+                                        <div class="itext"><img src="assets/img/icon_text.png"/></div>
+                                        <div>
+                                            <h5>课程介绍：<pre id="desContent" style="white-space: pre-wrap;word-wrap: break-word;" class="introduceContent">课程标题</pre></h5>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <p class="qrImgUrl_tip">关注公众号，看直播（长按识别）</p>
+                                <div class="qrImgUrl"><img src=""></div>
+                            </li>
+                            <!--热门视频列表-->
+                            <li>
+                                <div class="videoCourseBox">
+                                    <div class="clearfix liveListTitle" style="height: 30px">
+                                        <div class="findMore">查看更多<i><img src="assets/img/img_into.png"/> </i></div>
+                                    </div>
+                                    <ul class="ui-justify ui-whitespace hotliveList">
+                                        <li>
+                                            <div class="test-img"><img src="assets/img/poster.png"/></div>
+                                            <p class="videoTitle">我是标题</p>
+                                            <p class="videoCourse_other">
+                                                <span class="dialogueOther">10000</span>
+                                                <span class="peopleCountOther">10</span>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <div class="test-img"><img src="assets/img/poster.png"/></div>
+                                            <p class="videoTitle">我是标题</p>
+                                            <p class="videoCourse_other">
+                                                <span class="dialogueOther">10000</span>
+                                                <span class="peopleCountOther">10</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                   
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+    <div id="checking" style="display: none">
+    <!--绑定第三方-->
+    <div class="ui-dialog" id="bindPhone">
+        <div class="ui-dialog-cnt" style="width: 280px">
+            <div class="ui-dialog-bd">
+                <div class="noticeBind">
+                    <h4>提示绑定</h4>
+                    <div>发送验证码后绑定该手机和微信</div>
+                </div>
+                <div class="verify hide">
+                    <h4 style="margin-bottom: 10px">请输入短信验证码</h4>
+                    <div class="inputBoxContainer" id="inputBoxContainer">
+                        <input type="text" class="realInput"/>
+                        <div class="bogusInput">
+                            <input type="password" maxlength="6" disabled/>
+                            <input type="password" maxlength="6" disabled/>
+                            <input type="password" maxlength="6" disabled/>
+                            <input type="password" maxlength="6" disabled/>
+                            <input type="password" maxlength="6" disabled/>
+                            <input type="password" maxlength="6" disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-dialog-ft">
+                <button type="button" style="display:none" data-role="button" id="nottoBind">不绑定</button>
+                <button type="button" id="sendVerify">发送验证码</button>
+                <button type="button" class="hide countDowning" id="countNum"></button>
+                <button type="button" class="hide" id="sureBind">去绑定</button>
+            </div>
+        </div>
+    </div>
+    <div id="login_form">
+        <header class="loginHeader">
+            <h3>登录</h3>
+        </header>
+        <div class="ui-form-item ui-form-item-pure ui-border-b">
+            <input id="phoneNum" type="text" placeholder="手机号">
+        </div>
+
+        <div class="ui-form-item ui-form-item-pure ui-border-b">
+            <input id="password" type="password" placeholder="密码">
+        </div>
+        <div class="ui-form-item ui-form-item-pure">
+            <p>
+                <label class="ui-checkbox-s">
+                    <input type="checkbox" id="remPsd" name="checkbox">
+                </label>
+                记住密码
+            </p>
+        </div>
+        <div>
+            <button id="login" class="ui-btn-lg ui-btn-primary disabled">
+                登录
+            </button>
+        </div>
+        <div class="ui-tips ui-tips-info">
+            <i></i><span>该课程为团队课程，请先登录验证是否有观看权限。</span>
+        </div>
+    </div>
+    <div id="passChecked">
+        <header class="loginHeader">
+            <h3>密码课验证</h3>
+        </header>
+        <div class="ui-form-item ui-form-item-pure ui-border-b">
+            <input id="passcheckedInput" type="password" placeholder="请输入课程密码">
+        </div>
+        <div>
+            <button id="psdlogin" class="ui-btn-lg ui-btn-primary disabled">
+                登录
+            </button>
+        </div>
+        <div class="ui-tips ui-tips-info">
+            <i></i><span>该课程为密码课程，请输入密码验证是否有观看权限。</span>
+        </div>
+    </div>
+</div>
+    <div id="notgetAcross" style="display: none">
+    <section class="ui-notice">
+        <i></i>
+        <p> 对不起，您不是团队成员没有观看权利</p>
+    </section>
+</div>
+    <div class="ui-loading-block" style="display: -webkit-box;z-index: 1000;background: #f8f8f8">
+    <div class="ui-loading-cnt">
+        <i class="ui-loading-bright"></i>
+        <p>正在加载中...</p>
+    </div>
+</div>
+</div>
+<div id="reportBox">
+    <h4>请选择举报原因</h4>
+    <div class="cause">
+        <p class="clearfix">
+            <span><input type="checkbox"class="input_check" id="check1" value="欺诈"><label for="check1"></label>欺诈</span>
+            <span><input type="checkbox"class="input_check" id="check2" value="色情"><label for="check2"></label>色情</span>
+            <span><input type="checkbox"class="input_check" id="check3" value="暴力"><label for="check3"></label>暴力</span>
+        </p>
+        <p class="clearfix">
+            <span><input type="checkbox"class="input_check" id="check4" value="政治敏感"><label for="check4"></label>政治敏感</span>
+            <span><input type="checkbox"class="input_check" id="check5" value="侵权"><label for="check5"></label>侵权</span>
+            <span><input type="checkbox"class="input_check" id="check6" value="其他"><label for="check6"></label>其他</span>
+        </p>
+    </div>
+    <h4>请填写联系方式</h4>
+    <div>
+        <input type="text" class="telphone" placeholder="手机号"/>
+    </div>
+    <h4>证据截图</h4>
+    <div class="chooseImg">
+        <div class="imgBox" id="filePicker">
+            <input id="uploadImage" name="uploadImage" accept="image/*" type="file"/>
+        </div>
+    </div>
+    <div>
+        <input type="button" class="btn" id="submitReport" value="提交"/>
+    </div>
+</div>
+<div id="all">
+    <div id="qrDialog">
+        <img src="http://shouboke-web.oss-cn-hangzhou.aliyuncs.com/shareModel/assets/img/getqrcode.jpg">
+        <h5>长按二维码</h5>
+        <h4>加关注看直播</h4>
+        <div id="close">
+            <img src="./assets/img/icon_QRcode_close@2x.png" alt=""/>
+        </div>
+    </div>
+</div>
+<div id="zz">
+
+</div>
+<div id="bindDialog" style="float: left" class="ui-dialog">
+    <div class="ui-dialog-cnt">
+        <header class="ui-dialog-hd ui-border-b">
+            <h3>温馨提示</h3>
+            <i class="ui-dialog-close" data-role="button"></i>
+        </header>
+        <div class="ui-dialog-bd">
+            <!--<h4>很遗憾</h4>-->
+            <div>绑定手机号才能与主播互动哦</div>
+        </div>
+        <div class="ui-dialog-ft">
+            <button type="button" data-role="button">取消</button>
+            <button id='bind' type="button" data-role="button">现在就去</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="frozenui/lib/zepto.min.js"></script>
+<script src="frozenui/js/frozen.js"></script>
+<script src="assets/js/fastclick.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/mqttws31.js"></script>
+<script src="assets/js/wxSeriesClass.js"></script>
+<script src="assets/js/lrz.all.bundle.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,423 @@
+
+/* table css */
+
+.clearfix:after{
+    content:'';
+    display: table;
+    clear: both;
+}
+
+.clearfix{
+    *zoom:1;
+}
+
+.courseWare{
+    z-index: -1;
+}
+
+.filesTable .c {
+    height: 40px;
+    text-align: center;
+}
+
+.filesTable dd {
+    height: 40px;
+    text-align: center;
+}
+
+.filesTable .n {
+    float: left;
+    margin: 4px 0px -4px;
+    width: 48px;
+}
+
+.filesTable .p {
+    margin-left: 15px;
+    text-align: left;
+    font-size: 14px;
+    font-family: microsoft yahei;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 323px;
+}
+
+.filesTable .s {
+    width: 90px;
+}
+
+.filesTable .e {
+    width: 104px;
+    float: right;
+}
+
+.filesTable .e .e_top {
+    margin-top: 15px;
+}
+
+/* frame table css */
+
+.pos{
+    width: 0;
+    height: 0;
+    position: fixed;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+}
+
+.bigBox {
+    height: 500px;
+    overflow: hidden;
+    width: 900px;
+    margin-left: -400px;
+    margin-top: -300px;
+}
+
+.bigBox p {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+}
+
+.bigBox .top_content_table {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.bigBox .top_content {
+    text-align: right;
+    padding-bottom: 5px;
+}
+
+.bigBox .top_content_table a,
+.bigBox .top_content_table a:visited {
+    text-decoration: none;
+    color: #3A6D8C;
+    font-size: 12pt;
+}
+
+.bigBox .top_content_table a:hover,
+.bigBox .top_content_table a:visited:hover {
+    text-decoration: underline;
+    color: #3A6D8C;
+    font-size: 12pt;
+}
+
+.bigBox .left_content {
+    background: none repeat scroll 0 0 #ffffff;
+    float: left;
+    height: 500px;
+    overflow: hidden;
+    width: 289px;
+    position: fixed;
+}
+
+.bigBox .right_content {
+    background-color: #FFFFFF;
+    float: right;
+    height: 500px;
+    overflow: hidden;
+    width: 610px;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.copyright {
+    padding-left: 10px;
+    font-size: 12px;
+    color: #b9def5;
+}
+
+
+.choose_con {
+    width: 100%;
+    min-height: 410px;
+    overflow: hidden;
+    position: relative;
+}
+
+.choose_con1 {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+
+/*上传课件开始*/
+
+#courseWare .inputCenter{
+    position: absolute;
+    width: 181px;
+    height: 210px;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    margin:auto;
+    text-align: center;
+}
+#courseWare #upfile{
+    width: 80px;
+    height:80px;
+    position: relative;
+    left: 50px;
+}
+#courseWare .webuploader-container>div{
+    width: 100%;
+    height:100%;
+}
+#courseWare #upfile span.goonUpload{
+    position: relative;
+    top:-55px;
+    background: #4a5f7b;
+    color:white;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    text-decoration: none;
+    text-indent: 0;
+    height: 25px;
+    line-height: 25px;
+    font-size: 12px;
+}
+#courseWare #upfile img{
+    width: 100%;
+}
+#courseWare .webuploader-element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+    width: 100%;
+    height:100%;
+    top:15px;
+    left:0;
+}
+#courseWare .webuploader-pick {
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#courseWare .webuploader-pick-disable {
+    opacity: 0.6;
+    pointer-events:none;
+}
+
+#courseWare .webuploader-pick p.progress{
+    position: absolute;
+    top:0;
+    background:#dfdfdf;
+    width: 100%;
+    height:10px;
+}
+.webuploader-pick p.progress span{
+    display: inline-block;
+    background: #428BCA;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+#courseWare .fileInput{
+    width: 100%;
+    height:100%;
+    font-size: 300px;
+    position:absolute;
+    right:0;
+    top:0;
+    opacity: 0;
+    filter:alpha(opacity=0);
+    cursor:pointer;
+}
+
+#courseWare .upload-imgpre{
+    max-width: 168px;
+    max-height: 168px;
+}
+
+#courseWare .cancelUpload{
+    background-color: lightsteelblue;
+    width: 48px;
+    text-align: center;
+    padding: 6px 2px;
+    margin-top: 5px;
+    float: right;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#courseWare .uploadStyle .submitOver{
+    float: left;
+}
+
+#courseWare #fileName{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 181px;
+    font-size: 13px;
+}
+
+#courseWare #localImag{
+    text-align: center;
+}
+
+#courseWare .fileListContainer{
+    background-image: url("http://shouboke.tv/sbkUploadResource/icons/bg_file_list.jpg");
+    height:500px;
+    overflow:scroll;
+}
+
+/*上传课件结束*/
+/*上传视频文件开始*/
+#uploadcourse .upcourse{
+    display: inline-block;
+    width: 100%;
+    /*height:100%;*/
+}
+
+#uploadcourse .webuploader-container {
+    position: relative;
+}
+#uploadcourse .webuploader-element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+#uploadcourse .webuploader-pick {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: #00b7ee;
+    padding: 10px 15px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+#uploadcourse .webuploader-pick-hover {
+    background: #00a2d4;
+}
+
+#uploadcourse .webuploader-pick-disable {
+    opacity: 0.6;
+    pointer-events:none;
+}
+#uploadcourse .webuploader-container>div{
+    width: 100% !important;
+    height:100% !important;
+}
+#uploadcourse .webuploader-container>div input[type="file"]{
+    width: 100%;
+    height:100%;
+}
+/*上传视频文件结束*/
+
+.smallImg{
+    width: 15px;
+    height: 15px;
+}
+
+.mediumImg{
+    width: 20px;
+    height: 20px;
+}
+
+.footer .p1{
+    line-height: 22px;
+    margin-left: 66px;
+    margin-bottom:-15px;
+}
+
+.footer .p2{
+    line-height: 22px;
+    margin-left: 94px;
+}
+
+/*删除我的课件*/
+.e_top.delete{
+    cursor:pointer;
+    width: 15px;
+}
+
+#deleteBigBox{
+    display: none;
+}
+
+.deleteBoxCover{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    opacity: 0.5;
+    filter:alpha(opacity:50);
+    left: 0px;
+    top: 0px;
+    z-index: 1001;
+}
+
+.deleteContent{
+    z-index: 1002;
+    position: absolute;
+    width: 410px;
+    height: 248px;
+    background-color: white;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    margin:auto;
+    text-align: center;
+}
+
+/*h3{*/
+    /*background-color: #4b5f7a;*/
+    /*padding: 15px;*/
+    /*text-align: center;*/
+    /*color: #fff;*/
+    /*font-size: 18px;*/
+    /*font-weight: 400;*/
+    /*margin-bottom: 20px;*/
+/*}*/
+
+.deleteText{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 61px;
+}
+
+.buttonList{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-top: 36px;
+}
+
+button{
+    padding: 10px 20px;
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+#sureDelete{
+    background-color: #4b5f7a;
+}
+dd:nth-child(odd){
+    background: #E7EBEE;
+}
+dd:nth-child(even){
+    background: #EFF3F6;
+}

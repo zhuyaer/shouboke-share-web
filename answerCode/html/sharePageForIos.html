@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport"  content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="utf-8">
+    <title>分享邀请码</title>
+    <link rel="stylesheet" href="../css/mui.min.css"/>
+    <link rel="stylesheet" href="../css/sharePage.css"/>
+    <style>
+        p{
+            text-align: center;
+            color: #ffffff;
+            font-size: 16px;
+            line-height: 20px;
+        }
+        h5{
+            color: #F2F2F2;
+            font-size: 30px;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            top: 60%;
+            line-height: 40px;
+        }
+        #bottom>img{
+            width: 24%;
+            margin-left: 38%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="mui-content">
+    <img src="../img/shareImg.png" alt=""/>
+    <div id="main">
+        <p>使用<span id="user"></span>的</p>
+        <p>邀请码，你将帮他获得复活机会</p>
+    </div>
+    <h5></h5>
+    <div id="bottom">
+        <img src="../img/download_img.png" alt=""/>
+        <p>长按识别二维码</p>
+        <p>下载手播课APP参与知识竞赛赢大奖</p>
+    </div>
+</div>
+<script src="../js/mui.min.js"></script>
+<script src="../js/common.js"></script>
+<script>
+    var userName=getQueryString('userName');
+    console.log(userName)
+    var code=getQueryString('code');
+    mui('#user')[0].innerHTML=userName;
+    mui('h5')[0].innerHTML=code;
+</script>
+</body>
+</html>

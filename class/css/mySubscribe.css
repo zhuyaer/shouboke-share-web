@@ -1,0 +1,89 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.listLeft img{
+	width: 1.6rem;
+}
+
+#list ul>li{
+	width: 3.75rem;
+	height: 0.94rem;
+}
+
+.listLeft,.listRight{
+	height: 1.2rem;
+	width: 1.6rem;
+	float: left;
+}
+
+.listLeft{
+	height: .64rem;
+	width: 1.14rem;
+	overflow: hidden;
+}
+
+.listRight{
+	margin-left: .1rem;
+	width: 2.1rem;
+	height: .64rem;
+}
+
+.createTime{
+	font-size: .12rem;
+}
+
+.classTitle{
+	height: .4rem;
+	float: left;
+	width: 2.3rem;
+	line-height: .2rem;
+}
+
+.classTitle>p{
+	color: #393939;
+	font-size: .14rem;
+}
+
+.userHead{
+	width: .2rem;
+	height: .2rem;
+	border-radius: 50%;
+	float: left;
+	overflow: hidden;
+	margin-top: .05rem;
+}
+
+.userHead>img{
+	width: .2rem;
+}
+
+.createTime{
+	width: 1.2rem;
+	height: .15rem;
+	line-height: .2rem;
+	margin-left: .1rem;
+	margin-top: .05rem;
+	float: right;
+	color: #AAAAAA;
+	text-align: right;
+}
+
+.uname{
+	width: .5rem;
+	height: .15rem;
+	float: left;
+	margin-left: .1rem;
+	font-size: .15rem;
+	color: #AAAAAA;
+	margin-top: .03rem;
+}
+
+.mui-toast-container{
+	bottom: 250px;
+}
+
+.mui-table-view-chevron .mui-table-view-cell{
+	padding-right: 15px;
+}

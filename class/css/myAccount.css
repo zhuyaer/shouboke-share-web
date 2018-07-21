@@ -1,0 +1,146 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+html{
+	background-color: white;
+}
+
+#balance,#income{
+	width: 3.75rem;
+	background-color: #DD524D;
+}
+
+#income{
+	height: 2.4rem;
+	position: relative;
+}
+
+#incomeInfo{
+	position: absolute;
+	bottom: 0;
+	width: 3.75rem;
+	height: .6rem;
+	background-color: #F77838;
+}
+
+#incomeInfo>div{
+	width: 1.25rem;
+	float: left;
+	height: .6rem;
+}
+
+#incomeInfo>div>p{
+	height: .3rem;
+	width: 100%;
+	line-height: .3rem;
+	float: left;
+	text-align: center;
+	font-size: .14rem;
+	color: #FBC9AF;
+	font-weight: normal;
+}
+
+#incomeInfo>div>p:first-of-type{
+	color: #ffffff;
+	font-size: .18rem;
+}
+
+#balance{
+	background-color: white;
+}
+
+#balance>h5,#income>h5{
+	width: 100%;
+	text-align: center;
+	color: #F2F2F2;
+	padding-top: .7rem;
+	font-weight: normal;
+}
+
+#income>h5:first-of-type{
+	padding-top: .2rem;
+}
+
+#income>h5:nth-of-type(2){
+	padding-top: 0;
+}
+
+#balance>h4,#income>h4{
+	padding: .3rem;
+	width: 100%;
+	text-align: center;
+	color: #F2F2F2;
+	font-size: .4rem;
+}
+
+#income>h4{
+	height: .56rem;
+	padding: 0;
+	line-height: .56rem;
+}
+
+#balance>h5,#balance>h4{
+	color: #DD524D;
+}
+
+#recharge,#withdrawals{
+	background-color: inherit;
+	color: #F2F2F2;
+	border-radius: 5px;
+	border: 1px solid white;
+	margin-left: 1.425rem;
+	font-size: .17rem;
+	width: .9rem;
+	height: .3rem;
+	border-radius: .2rem;
+	line-height: .17rem;
+}
+
+#withdrawals{
+	margin-top: .15rem;
+	font-weight: normal;
+}
+
+#recharge{
+	border: 1px solid #DD524D;
+	color: #DD524D;
+}
+
+#rechargeTab{
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+#income{
+	background: linear-gradient(#FE5940, #FF8E45);
+}
+
+.mui-input-group>.mui-input-row>input{
+	text-align: right;
+}
+
+.mui-input-group>.mui-input-row>#chargeName::placeholder{
+	color: #393939;
+}
+
+.mui-input-group .mui-input-row:after,.mui-input-group:after{
+	color: #F2F2F2;
+}
+
+.mui-toast-container{
+	bottom: 250px;
+}
+
+#email{
+	width: 100%;
+	text-align: center;
+	font-size: .15rem;
+	color: #2D98DB;
+	background-color: #ffffff;
+	position: fixed;
+	bottom: .2rem;
+}

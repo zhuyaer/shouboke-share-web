@@ -1,0 +1,62 @@
+<!DOCTYPE html><html><head><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" charset=utf-8><title></title><link rel=stylesheet href=//at.alicdn.com/t/font_452104_fhnqalx6nz2rzfr.css><link href=./static/css/app.e03fefc97bb6545b793aa29fec380204.css rel=stylesheet></head><body><div id=app></div><script>sessionStorage.setItem('token','Bearer '+getQueryString('token'));
+      sessionStorage.setItem('id',getQueryString('id'));
+      sessionStorage.setItem('userId',getQueryString('userId'));
+//      sessionStorage.setItem('token','Bearer qfuYSFJKBAMqjPWx77WhXd1rsg6KLe9LLwP1vtrSYW1lYWraXOpWzpBO9oVbpc1X');
+//      sessionStorage.setItem('id','5a0155713e3faa1200f10146');
+      function getQueryString(name) { //获取地址栏参数
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+      }
+      (function (win) {
+        // html根元素
+        var HTML_ELEMENT = document.documentElement;
+        // 屏幕宽度
+        var SCREEN_WIDTH = 0;
+        // 标准fontSize计算值
+        var BASE_FONT_SIZE = 0;
+        // 处理后的fontSize计算值
+        var REAL_BASE_FONT_SIZE = 0;
+
+        /**
+         * 修复异常的fontSize代码
+         */
+        var fix = function () {
+          var ua = navigator.userAgent;
+          var isIOS = /(iPhone|iPad|iPod)/.test(ua);
+          // 非苹果设备，均进行检测
+          if (!isIOS) {
+            var div = win.document.createElement('div');
+            div.style.width = '3.75rem';
+            win.document.body.appendChild(div);
+            win.setTimeout(function () {
+              var getWidth = parseFloat(win.getComputedStyle(div).width);
+              if (getWidth != SCREEN_WIDTH) {
+                // 此时是出问题的情况
+                var ratio = getWidth / SCREEN_WIDTH;
+                REAL_BASE_FONT_SIZE = (BASE_FONT_SIZE / ratio).toFixed(4);
+                HTML_ELEMENT.style.fontSize = REAL_BASE_FONT_SIZE + 'px';
+              }
+              div.remove();
+            }, 100);
+          }
+        };
+
+        /**
+         * 调整根元素fontSize
+         */
+        var setBaseFontSize = function () {
+          // 获取屏幕宽度
+          SCREEN_WIDTH = HTML_ELEMENT.clientWidth;
+          // 将屏幕分成3.75份，获取每一份宽度
+          BASE_FONT_SIZE = SCREEN_WIDTH / 3.75;
+          // 写入html元素fontSize
+          HTML_ELEMENT.style.fontSize = BASE_FONT_SIZE + 'px';
+          fix();
+        };
+        setBaseFontSize();
+      })(window);</script><style>body{
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }</style><script type=text/javascript src=./static/js/manifest.67bcad25fbbb3bb96eef.js></script><script type=text/javascript src=./static/js/vendor.3ee8d041695f78559845.js></script><script type=text/javascript src=./static/js/app.db052476c3cb70daba1d.js></script></body></html>

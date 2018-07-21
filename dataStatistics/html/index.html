@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport"  content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="utf-8">
+    <title>数据统计</title>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </title>
+    <link rel="stylesheet" href="../css/mui.min.css"/>
+    <link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/icon-full.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/mui.picker.all.css" />
+    <style>
+        #block{
+            display: none;
+            background-color: #ffffff;
+        }
+        html{
+            background-color: #ffffff;
+        }
+        #courseCount,#benefits{
+            width: 3.35rem;
+            margin-left: 0.2rem;
+        }
+        #userCount{
+            width: 3.35rem;
+            margin-left: .2rem;
+         }
+        #courseCount{
+            margin-bottom: .2rem;
+        }
+        #userActivity>div:first-of-type,#rechargeIncome,#courseIncome,#register{
+            margin-top: .3rem;
+            margin-left: .1rem;
+        }
+        #userActivity>div:nth-of-type(2){
+            margin-left: .1rem;
+        }
+        #userActivity>div:first-of-type>span{
+            margin-left: .2rem;
+            color:#757887;
+        }
+        #userActivity>div:first-of-type>span:first-of-type{
+            color: #4A4A4A;
+            font-size: .18rem;
+            margin-left: 0;
+        }
+        #userActivity>div>span.active{
+            color: #14C864;
+        }
+        #activityDate{
+            color: #757887;
+            font-size: .14rem;
+            margin-top: .1rem;
+        }
+        #weekActive,#monthActive,#weekChart,#monthChart{
+            display: none;
+        }
+        #activeChart{
+            padding-left: .1rem;
+            padding-right: .1rem;
+            margin-top: .2rem;
+        }
+        #dayChart,#weekChart,#monthChart{
+            padding-bottom: .2rem;
+        }
+        .line{
+            background-color: #F4F4F4;
+            height: .1rem;
+        }
+        .tips{
+            color: #4A4A4A;
+        }
+        .tips>span:first-of-type{
+            font-size: .16rem;
+        }
+        .tips>span:nth-of-type(2){
+            font-size: .14rem;
+        }
+    </style>
+</head>
+<body>
+<div class="mui-content" id="block">
+    <div id="userActivity">
+        <div id="chooseDate">
+            <span>用户活跃度</span>
+            <span class="active">日活</span>
+            <span>周活</span>
+            <span>月活</span>
+        </div>
+        <div id="activityDate">
+            <div id="dayActive" class="dayActive">
+                <span></span>
+                <span> -- </span>
+                <span attr="dayActive"></span>
+                <span attr="dayActive" style="font-size: .18rem" class="mui-icon mui-icon-arrowdown"></span>
+            </div>
+            <div id="weekActive">
+                <span></span>
+                <span> -- </span>
+                <span attr="weekActive"></span>
+                <span attr="weekActive" style="font-size: .18rem" class="mui-icon mui-icon-arrowdown"></span>
+            </div>
+            <div id="monthActive">
+                <span></span>
+                <span> -- </span>
+                <span attr="monthActive"></span>
+                <span attr="monthActive" style="font-size: .18rem" class="mui-icon mui-icon-arrowdown"></span>
+            </div>
+        </div>
+        <div id="activeChart">
+            <div id="dayChart"></div>
+            <div id="weekChart"></div>
+            <div id="monthChart"></div>
+        </div>
+    </div>
+    <div class="line"></div>
+    <div id="benefits">
+
+    </div>
+     <div id="rechargeIncome">
+         <div id="reChargeDate" class="tips">
+             <span>充值收入</span>
+             <span>2017</span>
+             <span style="font-size: .18rem" class="mui-icon mui-icon-arrowdown"></span>
+         </div>
+         <div id="reChargeChart">
+
+         </div>
+     </div>
+    <div id="courseIncome">
+        <div id="courseDate" class="tips">
+            <span>课程收入</span>
+            <span>2017</span>
+            <span style="font-size: .18rem" class="mui-icon mui-icon-arrowdown"></span>
+        </div>
+        <div id="courseChart">
+
+        </div>
+    </div>
+    <div class="line"></div>
+    <div id="user">
+        <div id="userCount">
+
+        </div>
+        <div id="register">
+            <div id="registerDate" class="tips">
+                <span>注册曲线</span>
+                <span>2017</span>
+                <span style="font-size: .18rem" class="mui-icon mui-icon-arrowdown"></span>
+            </div>
+            <div id="registerChart">
+
+            </div>
+        </div>
+    </div>
+    <div class="line"></div>
+    <div id="courseCount">
+
+    </div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/mui.picker.all.js"></script>
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script src="https://cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="http://momentjs.cn/downloads/moment.min.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/modules/no-data-to-display.js"></script>
+<script>
+    load();
+    admin();
+    var activeOptions = {
+        title: {
+            text: null
+        },
+        yAxis: {
+            title: {
+                text: '用户活跃度'
+            }
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                month: '%Y-%m-%d'
+            }
+        },
+        legend:{
+            enabled:false
+        },
+        credits:{
+            enabled:false
+        },
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                }
+            }
+        },
+        series: [ {
+            name: '日活跃度',
+            data: []
+        }],
+        lang: {
+            noData: '暂无数据'
+        }
+    };
+    var pieOptions={
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        credits:{
+            enabled:false
+        },
+        title: {
+            text: '总收益',
+            verticalAlign: 'bottom',
+            style:{
+                color:'#4A4A4A',
+                fontSize:'.16rem'
+            }
+        },
+        tooltip: {
+            enabled:false,
+            headerFormat: '{series.name}<br>',
+            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: false,
+                cursor: 'pointer',
+                events: {
+                    click: function (event) {
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+//                    distance: -80,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} % <br/>{point.y}'
+                },
+                showInLegend: false
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '收益统计',
+            data: [
+                {name:'充值收入',color:'#26E27A'},
+                {name:'课程收入',color:'#469AFC'}
+            ]
+        }]
+    };
+    var pieOptions1={
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        credits:{
+            enabled:false
+        },
+        title: {
+            text: '总收益',
+            verticalAlign: 'bottom',
+            style:{
+                color:'#4A4A4A',
+                fontSize:'.16rem'
+            }
+        },
+        tooltip: {
+            enabled:false,
+            headerFormat: '{series.name}<br>',
+            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: false,
+                cursor: 'pointer',
+                events: {
+                    click: function (event) {
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+//                    distance: -80,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} % <br/>{point.y}'
+                },
+                showInLegend: false
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '收益统计',
+            data: [
+                {name:'充值收入',color:'#26E27A'},
+                {name:'课程收入',color:'#469AFC'}
+            ]
+        }]
+    };
+    function load(){//加载动画
+        el=Zepto.loading({
+            content:'正在加载中...'
+        })
+        el.on("loading:hide",function(){
+            mui('#block')[0].style.display='block';
+        });
+    }
+
+    function admin(){//使用默认账号登录获取token
+        $.ajax({//登陆获取用户信息
+            url:_url+'/login',
+            type:'post',//HTTP请求类型
+            data:{
+                username:'admin',
+                password:'lycam123'
+            },
+            timeout:10000,//超时时间设置为10秒；
+            success:function(data){
+                var token=data.token;
+                sessionStorage.setItem("token",token);
+                initDate();
+                getBenifits();
+                getRechargeIncome('2017');
+                getCourseIncome('2017');
+                getRegister('2017')
+            },
+            error:function(xhr,type,errorThrown){
+                //异常处理；
+                mui.toast('获取数据失败');
+            }
+        });
+    }
+
+    function getDayActive(url,start,end,options){//获取活跃数
+        $.ajax({
+            url:url,
+            type:'get',
+            data:{
+                start:start,
+                end:end
+            },
+            headers:{
+                access_token:sessionStorage.getItem('token')
+            },
+            success:function(data){
+                var array=[];
+                var time=[];
+                for(var i=0;i<data.success.length;i++){
+                    array.push(data.success[i].count);
+                    var date=data.success[i]._id.month+'-'+data.success[i]._id.day;
+                    time.push(date);
+                }
+                activeOptions.series[0].data = array;
+                activeOptions.xAxis.categories=time;
+                activeOptions.xAxis.minTickInterval=5;
+                activeOptions.yAxis.title.text='用户活跃度';
+                activeOptions.series[0].name='用户活跃度';
+                var chart = Highcharts.chart('dayChart', activeOptions);
+                el.loading("hide");
+            },
+            error:function(){
+
+            }
+        })
+    }
+
+    function getWeekActive(url,start,end,options){//获取活跃数
+        $.ajax({
+            url:url,
+            type:'get',
+            data:{
+                start:start,
+                end:end
+            },
+            headers:{
+                access_token:sessionStorage.getItem('token')
+            },
+            success:function(data){
+                var array=[];
+                var time=[];
+                for(var i=0;i<data.success.length;i++){
+                    array.push(data.success[i].count);
+                    var date='第'+data.success[i]._id.week+'周';
+                    time.push(date);
+                }
+                activeOptions.series[0].data = array;
+                activeOptions.xAxis.categories=time;
+                activeOptions.xAxis.minTickInterval=5;
+                activeOptions.yAxis.title.text='用户活跃度';
+                activeOptions.series[0].name='用户活跃度';
+                var chart = Highcharts.chart('weekChart', activeOptions);
+            },
+            error:function(){
+
+            }
+        })
+    }
+
+    function getMonthActive(url,start,end,options){//获取活跃数
+        $.ajax({
+            url:url,
+            type:'get',
+            data:{
+                start:start,
+                end:end
+            },
+            headers:{
+                access_token:sessionStorage.getItem('token')
+            },
+            success:function(data){
+                var array=[];
+                var time=[];
+                for(var i=0;i<data.success.length;i++){
+                    array.push(data.success[i].count);
+                    var date=data.success[i]._id.month+'月';
+                    time.push(date);
+                }
+                console.log(time);
+                activeOptions.series[0].data = array;
+                activeOptions.xAxis.categories=time;
+                activeOptions.xAxis.minTickInterval=2;
+                activeOptions.yAxis.title.text='用户活跃度';
+                activeOptions.series[0].name='用户活跃度';
+                var chart = Highcharts.chart('monthChart', activeOptions);
+            },
+            error:function(){
+
+            }
+        })
+    }
+    function initDate(){//初始化时间，日活默认为最近30天的数据,周活为最近三个月，月活为最近1年
+        var end=moment().format('YYYY-MM-DD');
+        var start=moment().subtract(1, "months").format("YYYY-MM-DD");
+        var monthStart=moment().subtract(3, "months").format("YYYY-MM-DD");
+        mui('#dayActive span')[0].innerHTML=start;
+        mui('#dayActive span')[2].innerHTML=end;
+        getDayActive(_url+'/dau',start,end);
+        var weekStart=moment().subtract(3, "months").format("YYYY-MM-DD");
+        getWeekActive(_url+'/wau',weekStart,end);
+        var monthStart=moment().subtract(1, "years").format("YYYY-MM-DD");
+        getMonthActive(_url+'/mau',monthStart,end);
+    }
+
+    function getBenifits(){
+        $.ajax({
+            url:_url+'/statistics/overview',
+            type:'get',
+            headers:{
+                access_token:sessionStorage.getItem('token')
+            },
+            success:function(data){
+                var options=pieOptions1;
+                options.series[0].data[0].y=data.totalInChargeIncome;
+                options.series[0].data[1].y=data.teachersTotalIncome;
+                options.plotOptions.pie.dataLabels.distance=-60
+                options.plotOptions.pie.events.click=function(event){
+                    if(event.point.name=='课程收入'){
+                        location.href='./incomeList.html';
+                    }else{
+                        location.href='./rechargeIncome.html';
+                    }
+                }
+                var chart = Highcharts.chart('benefits', options);
+                var options1=pieOptions;
+                options1.series[0].data[0].y=data.purchaseUsers;
+                options1.series[0].data[0].name='付费用户';
+                options1.series[0].data[1].y=data.notPayUsers;
+                options1.series[0].data[1].name='免费用户';
+                options1.title.text='总用户数：'+data.totalUsers;
+                options1.plotOptions.pie.events.click=function(event){
+                    if(event.point.name=='付费用户'){
+                        location.href='./payUser.html';
+                    }else{
+                        location.href='./freeUser.html';
+                    }
+                }
+                var chart = Highcharts.chart('userCount', options1);
+                var options2=pieOptions;
+                options2.series[0].data[0].y=data.chargeLessons;
+                options2.series[0].data[0].name='收费课程';
+                options2.series[0].data[1].y=data.freeLessons;
+                options2.series[0].data[1].name='免费课程';
+                options2.series[0].data.push({name:'活动视频',y:data.activityLessons,color:'#F5A623'})
+                options2.title.text='课程总数：'+data.totalLessons;
+                options2.plotOptions.pie.events.click=function(event){
+                    location.href='./lessonList.html';
+                }
+                var chart = Highcharts.chart('courseCount', options2);
+            },
+            error:function(){
+
+            }
+        })
+    }
+
+    mui("#block").on('tap','#chooseDate',function(event){
+        var text=event.target.innerHTML;
+        for(var i=0;i<mui('#chooseDate span').length;i++){
+            mui('#chooseDate span')[i].setAttribute('class','');
+        }
+        event.target.setAttribute('class','active');
+        if(text=='日活'){
+            mui('#monthActive')[0].style.display='none';
+            mui('#weekActive')[0].style.display='none';
+            mui('#dayActive')[0].style.display='block';
+            mui('#dayChart')[0].style.display='block';
+            mui('#weekChart')[0].style.display='none';
+            mui('#monthChart')[0].style.display='none';
+        }else if(text=='周活'){
+            var end=moment().format('YYYY-MM-DD');
+            var weekStart=moment().subtract(3, "months").format("YYYY-MM-DD");
+            mui('#weekActive span')[0].innerHTML=weekStart;
+            mui('#weekActive span')[2].innerHTML=end;
+            mui('#monthActive')[0].style.display='none';
+            mui('#weekActive')[0].style.display='block';
+            mui('#dayActive')[0].style.display='none';
+            mui('#dayChart')[0].style.display='none';
+            mui('#weekChart')[0].style.display='block';
+            mui('#monthChart')[0].style.display='none'
+        } else if(text=='月活'){
+            var end=moment().format('YYYY-MM-DD');
+            var monthStart=moment().subtract(1, "years").format("YYYY-MM-DD");
+            mui('#monthActive span')[0].innerHTML=monthStart;
+            mui('#monthActive span')[2].innerHTML=end;
+            mui('#monthActive')[0].style.display='block';
+            mui('#weekActive')[0].style.display='none';
+            mui('#dayActive')[0].style.display='none';
+            mui('#dayChart')[0].style.display='none';
+            mui('#weekChart')[0].style.display='none';
+            mui('#monthChart')[0].style.display='block';
+        }
+    })
+
+    mui("#block").on('tap','#activityDate',function(event){
+        var attr=event.target.getAttribute('attr')
+        if(attr=='dayActive'){
+            $('#dayChart').show();
+            $('#weekChart').hide();
+            $('#monthChart').hide();
+            var dtPicker = new mui.DtPicker({type:'date'});
+            dtPicker.show(function(data){
+                var end=data.value;
+                var start=moment(data.value).subtract(1, "months").format("YYYY-MM-DD");
+                mui('#dayActive span')[0].innerHTML=start;
+                mui('#dayActive span')[2].innerHTML=end;
+                getDayActive(_url+'/dau',start,end);
+            });
+        }else if(attr=='weekActive'){
+            $('#dayChart').hide();
+            $('#weekChart').show();
+            $('#monthChart').hide();
+            var dtPicker = new mui.DtPicker({type:'date'});
+            dtPicker.show(function(data){
+                var end=data.value;
+                var start=moment(data.value).subtract(3, "months").format("YYYY-MM-DD");
+                mui('#weekActive span')[0].innerHTML=start;
+                mui('#weekActive span')[2].innerHTML=end;
+                getWeekActive(_url+'/wau',start,end);
+            });
+        }else if(attr=='monthActive'){
+            $('#dayChart').hide();
+            $('#weekChart').hide();
+            $('#monthChart').show();
+            var dtPicker = new mui.DtPicker({type:'date'});
+            dtPicker.show(function(data){
+                var end=data.value;
+                var start=moment(data.value).subtract(1, "years").format("YYYY-MM-DD");
+                mui('#monthActive span')[0].innerHTML=start;
+                mui('#monthActive span')[2].innerHTML=end;
+                getMonthActive(_url+'/mau',start,end);
+            });
+        }
+    })
+
+    function getRechargeIncome(year){//获取充值收入
+        $.ajax({
+            url:_url+'/statistics/lessons/incomes/chart',
+            type:'get',
+            data:{
+                year:year,
+                groupType:'month',
+                listType:'inCharge'
+            },
+            headers:{
+                access_token:sessionStorage.getItem('token')
+            },
+            success:function(data){
+                var array=[];
+                var time=[];
+                for(var i=0;i<data.length;i++){
+                    array.push(data[i].money);
+                    var date=data[i]._id.timePoint+'月';
+                    time.push(date);
+                }
+                var options=activeOptions;
+                options.series[0].data = array;
+                options.xAxis.categories=time;
+                options.xAxis.minTickInterval=2;
+                options.yAxis.title.text='充值收入';
+                options.series[0].name='充值收入';
+                var chart = Highcharts.chart('reChargeChart', options);
+            },
+            error:function(){
+
+            }
+        })
+    }
+    function getCourseIncome(year){//获取课程收入
+        $.ajax({
+            url:_url+'/statistics/lessons/incomes/chart',
+            type:'get',
+            data:{
+                year:year,
+                groupType:'month',
+                listType:'lesson'
+            },
+            headers:{
+                access_token:sessionStorage.getItem('token')
+            },
+            success:function(data){
+                var array=[];
+                var time=[];
+                for(var i=0;i<data.length;i++){
+                    array.push(data[i].money);
+                    var date=data[i]._id.timePoint+'月';
+                    time.push(date);
+                }
+                var options=activeOptions;
+                options.series[0].data = array;
+                options.xAxis.categories=time;
+                options.xAxis.minTickInterval=2;
+                options.yAxis.title.text='课程收入';
+                options.series[0].name='课程收入';
+                var chart = Highcharts.chart('courseChart', options);
+            },
+            error:function(){
+
+            }
+        })
+    }
+    function getRegister(year){//获取用户注册曲线
+        $.ajax({
+            url:_url+'/statistics/sign/users/chart',
+            type:'get',
+            data:{
+                year:year,
+                groupType:'month'
+            },
+            headers:{
+                access_token:sessionStorage.getItem('token')
+            },
+            success:function(data){
+                var array=[];
+                var time=[];
+                for(var i=0;i<data.length;i++){
+                    array.push(data[i].count);
+                    var date=data[i]._id.timePoint+'月';
+                    time.push(date);
+                }
+                var options=activeOptions;
+                options.series[0].data = array;
+                options.xAxis.categories=time;
+                options.xAxis.minTickInterval=2;
+                options.yAxis.title.text='用户注册数';
+                options.series[0].name='用户注册数';
+                var chart = Highcharts.chart('registerChart', options);
+            },
+            error:function(){
+
+            }
+        })
+    }
+    mui("#block").on('tap','#reChargeDate',function(){
+        var picker = new mui.PopPicker();
+        picker.setData([{value:'2015',text:'2015'},{value:'2016',text:'2016'},{value:'2017',text:'2017'},{value:'2018',text:'2018'}]);
+        picker.show(function(data){
+            $('#reChargeDate span')[1].innerHTML=data[0].value;
+            getRechargeIncome(data[0].value)
+        });
+    })
+    mui("#block").on('tap','#courseDate',function(){
+        var picker = new mui.PopPicker();
+        picker.setData([{value:'2015',text:'2015'},{value:'2016',text:'2016'},{value:'2017',text:'2017'},{value:'2018',text:'2018'}]);
+        picker.show(function(data){
+            $('#courseDate span')[1].innerHTML=data[0].value;
+            getCourseIncome(data[0].value)
+        });
+    })
+    mui("#block").on('tap','#registerDate',function(){
+        var picker = new mui.PopPicker();
+        picker.setData([{value:'2015',text:'2015'},{value:'2016',text:'2016'},{value:'2017',text:'2017'},{value:'2018',text:'2018'}]);
+        picker.show(function(data){
+            $('#registerDate span')[1].innerHTML=data[0].value;
+            getRegister(data[0].value)
+        });
+    })
+</script>
+</body>
+</html>

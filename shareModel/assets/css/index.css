@@ -1,0 +1,810 @@
+.clearfix{
+    *zoom:1
+}
+.clearfix:after{
+    content:'';
+    display:table;
+    clear: both;
+}
+#getAcross header.ui-header.ui-border-b{
+    position: relative;
+    background: #191919;
+}
+#getAcross section.ui-container{
+    border-top:0;
+}
+.logo{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/logoIcon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 7px;
+    z-index: 100;
+    left: 12px;
+}
+header p{
+    padding-left:45px;
+}
+
+
+#videoBox{
+    width: 100%;
+    position: relative;
+    padding-bottom:56.25%;
+    height: 0;
+    overflow: hidden;
+}
+#video{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover;
+}
+/*直播*/
+.liveLine{
+    color:#000 ;
+    font-size: 12px;
+    position: relative;
+    text-align: right;
+    margin-right: 10px;
+}
+.liveLine .chooseImg{
+    margin-right: 2px;
+    display: inline-block;
+    width: 20px;
+    height:20px;
+    background-image: url("../img/notChoose.png");
+    background-size: cover;
+    position: relative;
+    top:3px
+}
+.liveLine .chooseImg.active{
+    background-image: url("../img/choose.png");
+}
+.liveLine .road1,.liveLine .road2{
+    position: relative;
+    top:-3px;
+    margin-right: 3px;
+}
+.pauseTip{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    text-align: center;
+    background: url("../img/poster.png");
+    background-size: cover;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+}
+
+.pauseTipText{
+    z-index: 2;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-left: -48px;
+}
+
+.live_playBack .poster img{
+    width: 100%;
+}
+.live_playBack .poster{
+    display: none;
+}
+.live_playBack #video{
+    background: #000;
+    display: none;
+}
+/*预告*/
+.videoTab{
+    position: relative;
+    color:#fff;
+    display: none;
+}
+.videoTab.active{
+    display: block;
+}
+.readyV .poster img{
+    width: 100%;
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+}
+.timeTip{
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    margin-left: -48px;
+    z-index: 1;
+}
+.delayTip{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-left: -38px;
+    z-index: 1;
+    display: none;
+}
+.blackrgba{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    font: 25px/1.5 'Open Sans Condensed',sans-serif;
+}
+.blackrgba ul{
+    margin: 0 auto;
+    margin-top: 60px;
+}
+.timeItem{
+    width:50px;
+    height:50px;
+    line-height: 50px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    position: relative;
+    background: rgba(0,0,0, 0.7);
+    font-size:1.65em;
+    text-align:center;
+}
+.line{
+    position: absolute;
+    width: 100%;
+    top:50%;
+    height: 1px;
+    background: #dddddd;
+
+}
+.blackrgba ul{
+    display: table;
+}
+.blackrgba ul>li{
+    display: table-cell;
+}
+.blackrgba ul>li>div{
+    float: left;
+}
+.blackrgba ul>li>div:nth-child(2){
+    line-height: 50px;
+    height: 50px;
+    font-size: 14px;
+}
+.peopleCount,.dialogue{
+    float: right;
+    /*font-size: 10px;*/
+    margin-right: 10px;
+    color: #BBBBBB;
+}
+.peopleCount:before{
+    content: '';
+    display: inline-block;
+    background: url(../img/icon_eye.png);
+    background-size: 100% 90%;
+    background-repeat: no-repeat;
+    margin-right: 3px;
+    width: 18px;
+    height: 14px;
+    position: relative;
+    top: 3px;
+}
+.dialogue:before{
+    content: '';
+    display: inline-block;
+    background: url(../img/icon_bubble.png);
+    background-size: 100% 90%;
+    background-repeat: no-repeat;
+    margin-right: 4px;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 4px;
+}
+.dialogue:after{
+    content: '|';
+    display: inline-block;
+    margin-left: 10px;
+    color: #707071;
+    font-weight: 700;
+}
+.police{
+    float: right;
+}
+.police:before{
+    content: '';
+    display: inline-block;
+    background: url(../img/button_Report@2x.png);
+    background-size: 100% 90%;
+    background-repeat: no-repeat;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 6px;
+}
+
+.ui-tab-nav.ui-border-b{
+    background: #000;
+}
+.ui-tab-nav li.current {
+    color: #fff;
+    border-bottom: 2px #fff solid;
+}
+.ui-container .ui-tab-content{
+    color: #fff;
+    background: #363940;
+}
+li.streamInfo>div:nth-child(1){
+    margin-right: 10px;
+}
+li.streamInfo>div:nth-child(2){
+    margin-top: -7px;
+}
+.infoBox.ui-list{
+    background: #363940;
+    margin-bottom: 40px;
+}
+.infoBox.ui-list>li{
+    margin-left: 0;
+}
+li.streamInfo small.date{
+    float: right;
+    position: relative;
+    top: 3px;
+}
+li.streamInfo .ui-list-info .ui-nowrap{
+    color: #858d9f;
+}
+
+li.streamInfo .userqusetion{
+    margin-left: 7px;
+    width: 20px;
+    height: 20px;
+    /*安卓手机对line-height有兼容性*/
+    display: inline-block;
+    position: relative;
+    top: 2px;
+}
+li.streamInfo .userqusetion img{
+    width: 100%;
+}
+li.streamInfo .questionContent{
+    color:#4ee77e;
+}
+
+#sendInfoBox{
+    z-index: 100;
+    position: fixed;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.question{
+    width: 30px;
+    height:30px;
+    border-radius: 50%;
+    background: #858d9f;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 5px;
+    color: #fff;
+}
+.question.active{
+    background: #14b464;
+}
+.sendInfo{
+    background: #ff670c;
+    color: #fff;
+    border: none;
+}
+.ui-tab-content{
+    word-break: break-all;
+    overflow-y: auto;
+
+    /*省略号*/
+    overflow-x: hidden;
+    /* white-space: nowrap; */
+    /* text-overflow: ellipsis; */
+}
+ul.ui-tab-content>li{
+    padding: 5px;
+    display: none;
+}
+ul.ui-tab-content>li.show{
+    display: block;
+}
+.chatRoomlI{
+    margin-bottom: 45px;
+}
+.courseDesc{
+    padding-top: 10px;
+    background: #363940;
+}
+.courseDesc h5{
+    color:#858d9f
+}
+
+.courseDesc .ititle,.courseDesc .itime,.courseDesc .itext{
+    width: 35px;
+    height: 35px;
+    position: relative;
+    top:-5px;
+}
+.courseDesc>li{
+    clear: both;
+}
+.courseDesc li>div>img{
+    width: 100%;
+}
+.courseDesc>li>div:first-child{
+    width: 10%;
+}
+.courseDesc>li>div:last-child{
+    width: 86%;
+}
+/* 判断ipad */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px){
+    .courseDesc>li>div:first-child{
+        width: 35px;
+    }
+}
+
+.courseDesc>li>div{
+    float: left;
+    margin-bottom: 10px;
+}
+
+.courseDesc span{
+    color: #fff;
+}
+.courseDesc .startTime{
+    margin-right: 10px;
+}
+.qrImgUrl{
+    width: 100px;
+    height:100px;
+    margin: 0 auto;
+}
+.qrImgUrl img{
+    width: 100%;
+}
+.qrImgUrl_tip{
+    text-align: center;
+}
+.videoList.ui-list{
+    background-color: #000;
+    color: #dddddd;
+}
+.videoList li{
+    position: relative;
+    border-bottom: 1px solid #141923;
+}
+.videoList li:last-child{
+    border: none;
+}
+.videoList small{
+    position: absolute;
+    color: #85809f;
+    top:67%;
+    font-size: 12px;
+}
+.videoListBox>ul{
+    display: none;
+}
+.videoListBox>ul.active{
+    display: block;
+}
+
+.videoListBox div.formore{
+    text-align: center;
+    line-height: 40px;
+    font-size: 12px;
+    color:#85809f
+}
+.videoListBox a{
+    color: #fff;
+}
+.nothing{
+    height:100%;
+    text-align: center;
+    background: #1f1d28;
+    margin-top: 20%;
+}
+.hide{
+    display: none !important;
+}
+#login_form{
+    padding: 20px;
+}
+.loginHeader h3{
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+    font-size: 18px;
+    border-bottom: 1px #00b3f0 solid;
+}
+#countNum.countDowning{
+    color:#cccccd
+}
+#sureBind.disabled{
+    color:#cccccd
+}
+
+/*报名相关*/
+#isSubscribe{
+    display: none;
+}
+.greenPoint{
+    font-size: 16px;
+    color:#14b464 !important;
+}
+.apply{
+    padding: 0 8px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    background: #14b464;
+    color: #fff;
+    position: absolute;
+    right:10px;
+    z-index: 1000;
+}
+.apply.active{
+    background: #e9ebec;
+    color: #ccc;
+    font-size: 12px;
+}
+.charge{
+    padding: 0 8px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    background: #49c6fd;
+    color: #fff;
+    position: absolute;
+    right:70px;
+    z-index: 1000;
+}
+
+/*气泡提示*/
+.popup{
+    position: absolute;
+    right:10px;
+    top:80px;
+    z-index: 1000;
+    display: inline-block;
+    background: #000;
+    color:#e5cf85;
+    padding: 10px;
+    border-radius: 5px;
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    -o-transition: all 1s;
+}
+.popup:before {
+    position: absolute;
+    content: '';
+    width: 0.75em;
+    height: 0.75em;
+    background: #000;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    z-index: 2;
+    top: -0.375em;
+    right: 20px;
+}
+.popup.visible{
+    opacity: 1;
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+
+
+
+
+/*----------------------------------------------------*/
+.videoCourseBox{
+    padding: 5px;
+}
+.videoCourseTitle{
+    float: left;
+    font-size: 16px;
+}
+.videoCourseTitle>i{
+    display: inline-block;
+    width: 15px;
+    height: 20px;
+    margin-right: 10px;
+    position: relative;
+    top: -2px;
+}
+.videoCourseTitle>i>img{
+    width: 100%;
+    vertical-align: middle;
+}
+.findMore{
+    float: right;
+    color: #858d9f;
+}
+.findMore>i{
+    display: inline-block;
+    width: 9px;
+    height: 10px;
+    margin-left: 5px;
+    position: relative;
+    top: 1px;
+}
+.findMore>i>img{
+    width: 100%;
+}
+.ui-whitespace{
+    padding-left: 0;
+    padding-right: 0;
+}
+.videoCourseBox>.ui-whitespace>li{
+    width: 48%;
+    color: #858d9f;
+}
+.videoCourseBox>.ui-whitespace>li:nth-child(2n){
+    float: right;
+}
+.videoCourseBox>.ui-whitespace>li>.test-img{
+   width: 100%;
+    height:0;
+    position: relative;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+}
+
+.videoCourseBox .test-img img{
+    width: 100%;
+}
+.ui-justify li {
+    text-align: left;
+}
+.videoCourse_other>span{
+    display: inline-block;
+}
+
+.dialogueOther:before{
+    content: '';
+    display: inline-block;
+    background: url(../img/icon_bubble2.png);
+    background-size: 100% 90%;
+    background-repeat: no-repeat;
+    margin-right: 4px;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 4px;
+}
+.dialogueOther:after{
+    content: '|';
+    display: inline-block;
+    margin-left:10px;
+    margin-right:10px;
+    color:#858d9f;
+    font-weight: 700;
+}
+.peopleCountOther:before{
+    content: '';
+    display: inline-block;
+    background: url(../img/icon_eye2.png);
+    background-size: 100% 90%;
+    background-repeat: no-repeat;
+    margin-right: 3px;
+    width: 18px;
+    height: 14px;
+    position: relative;
+    top: 3px;
+}
+.videoTitle{
+    font-weight: 600;
+    margin-top: 10px;
+}
+.videoCourseBox .ui-whitespace{
+    margin-bottom: 15px;
+}
+
+/*这里是举报部分的分割线*/
+#contentBox,#reportBox{
+    display: none;
+}
+#contentBox.show,#reportBox.show{
+    display: block;
+}
+#reportBox.show{
+    overflow-x: hidden;
+}
+#reportBox{
+    background: #f1f0f5;
+}
+#reportBox h4{
+    color:#afafaf;
+    font-weight: normal;
+    height:40px;
+    line-height: 40px;
+    padding-left: 10px;
+}
+#reportBox h4:before{
+    content: "\272D";
+    color:red;
+    font-size: 12px;
+    position: relative;
+    bottom: 3px;
+}
+#reportBox .cause,#reportBox .chooseImg{
+    background: #fff;
+    padding:10px;
+    font-size: 16px;
+}
+/*自定义checkbox*/
+#reportBox .cause span {position: relative;}
+#reportBox .cause .input_check {position: absolute;visibility: hidden;}
+#reportBox .cause .input_check+label {display: inline-block;width: 16px;height: 16px;border: 1px solid #a7a7a7;position: relative;
+    top: 2px;}
+#reportBox .cause .input_check:checked+label:after {content: "";position: absolute;left: 1px;bottom: 7px;width: 9px;height: 4px;
+    border: 2px solid #a7a7a7;border-top-color: transparent;border-right-color: transparent;
+    -ms-transform: rotate(-60deg);
+    -moz-transform: rotate(-60deg);
+    -webkit-transform: rotate(-60deg);
+    transform: rotate(-45deg);}
+
+#reportBox .cause label{
+    margin-right: 5px;
+}
+#reportBox .cause>p:first-child{
+    margin-bottom: 10px;
+}
+#reportBox .cause>p>span{
+    width: 33.333%;
+    display: block;
+    float: left;
+}
+
+#reportBox .telphone{
+    width: 100%;
+    height:40px;
+    line-height: 40px;
+    padding-left: 10px;
+}
+#reportBox .imgBox{
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-image: url("../../assets/img/icon_add.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#reportBox input#uploadImage{
+    position: absolute;
+    /*font-size: 100px;*/
+    right: 0;
+    top: 0;
+    display: block;
+    cursor: pointer;
+    opacity: 0;
+    width: 60px;
+    height: 60px;
+}
+
+#reportBox .imgBox img{
+    width: 100%;
+}
+#reportBox .imgBox label{
+    background: none !important;
+    cursor: default !important;
+}
+#reportBox .btn{
+    display: inline-block;
+    overflow: visible;
+    padding: 0 22px;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-size: 16px;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom,#44b549 0,#44b549 100%);
+    border-color: #44b549;
+    color: #fff;
+    width: 100%;
+    margin-top: 10px;
+}
+#reportBox .btn.disabled{
+    background-image: linear-gradient(to bottom,#dfdfdf 0,#dfdfdf 100%);
+    border-color: #dfdfdf;
+}
+#reportBox .telphone{
+    border: none;
+}
+
+#qrDialog h5{
+    text-align: center;
+    margin: 0;
+    height: .2rem;
+    line-height: .24rem;
+    /*background-color: white;*/
+    padding: 0;
+    margin-top: .1rem;
+}
+#qrDialog h4{
+    text-align: center;
+    margin-top: .05rem;
+}
+#qrDialog{
+    width: 2.2rem;
+    height: 2.8rem;
+    /*display: none;*/
+    z-index: 1;
+    /*background-color: #f2f2f2;*/
+    background-image: url("../img/qrbg.png");
+    background-size: cover;
+}
+#qrDialog>img{
+    width: 1.48rem;
+    margin-left: .36rem;
+    margin-top: .36rem;
+    box-shadow: 2px 2px 10px #aaaaaa;
+}
+#zz{
+    width: 100%;
+    height: 100%;
+    background-color: #808080;
+    position: absolute;
+    top:0;
+    left: 0;
+    display: none;
+    z-index: 100;
+}
+#all{
+    width: 2.2rem;
+    height: 3.7rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -1.1rem;
+    margin-top: -1.85rem;
+    z-index: 101;
+    display: none;
+}
+#close img{
+    width: .4rem;
+    margin: 0;
+    margin-top: .9rem;
+}
+
+#close{
+    text-align: center;
+}

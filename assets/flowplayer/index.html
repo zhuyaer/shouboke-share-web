@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/jquery.min.js"></script>
+    <!--视频插件-->
+    <script src="flowplayer.min.js"></script>
+    <link rel="stylesheet" href="skin/functional.css">
+
+</head>
+<style>
+    *{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font: 12px "Myriad Pro",
+        "Lucida Grande", sans-serif;
+        text-align: center;
+        width: 100%;
+        padding: 5%;
+        height:100%;
+        /*background-image: url("./assets/img/5.jpg");*/
+        /*background-size:cover ;*/
+    }
+    #container{
+        width: 70%;
+        overflow: hidden;
+        min-width: 900px;
+        margin: 0 auto;
+        *zoom:1
+    }
+    #container:after{
+        display: table;
+        content: '';
+        clear: both;
+    }
+    #video{
+        width: 100%;
+        position: relative;
+        padding-bottom:56.25%;    /*需要用padding来维持16:9比例,也就是9除以16*/
+        height: 0;
+    }
+    #leftVideo{
+        width: 80%;
+        float: left;
+        position: relative;
+    }
+    #rightPlayList{
+        width: 18%;
+        height:100%;
+        float: right;
+    }
+    #listUl{
+        height:100%
+    }
+    #listUl li.active{
+        border: 1px solid #00a7c8;
+    }
+    #listUl li:hover{
+        border: 1px solid #00a7c8;
+    }
+    #listUl li{
+        height:20%;
+        background-size: 100% 100%;
+    }
+    #sendInfo{
+        position:absolute;
+        bottom:50px;
+        right:10px;
+        z-index: 9999999999;
+    }
+    #msgInfo{
+        height: 30px;
+        line-height: 30px;
+        padding: 5px;
+    }
+    #send{
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        display: inline-block;
+        background: #fff;
+        cursor: pointer;
+    }
+    #on_off{
+        text-align: right;
+    }
+    #on_off img{
+        width:70px;
+        cursor: pointer;
+    }
+</style>
+<body>
+<div id="container">
+    <div id="leftVideo">
+        <div id="video"></div>
+        <div id="sendInfo">
+            <div id="on_off"><img src="assets/img/on1.png"/></div>
+            <input type="text" id="msgInfo" placeholder="发送弹幕"/><span id="send">发送</span>
+        </div>
+    </div>
+    <div id="rightPlayList">
+        <ul id="listUl">
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    (function(){
+        var _this={};
+        _this.player = flowplayer($("#video"), {
+            splash: true,
+            ratio:0.4167,
+            autoplay:true,
+            adaptiveRatio: true,
+            swf: 'flowplayer/flowplayer.swf',
+            swfHls: 'flowplayer/flowplayerhls.swf',
+            clip: {
+                sources: [
+                    { type:"",
+                        src:"" }
+                ]
+            }
+        });
+        _this.playList=[];
+        _this.barrager="";
+        _this.item=null;
+        _this.status=true
+
+        var playerHeight=$("#leftVideo").height();
+        $("#container").css("height",playerHeight+"px");
+        loadVideo();
+        $("#send").click(function(){
+            var msg=$("#msgInfo").val();
+            sendInfo(msg)
+        });
+        $("#listUl").on("click","li",function(){
+            var i=$(this).attr("index");
+            load(i)
+        });
+        $("#on_off img").click(function(){
+            if(_this.status){
+                _this.status=false
+                $(this).attr("src","assets/img/off1.png");
+                $.fn.barrager.removeAll();
+
+            }else{
+                _this.status=true;
+                $(this).attr("src","assets/img/on1.png");
+            }
+        })
+        /*接收消息*/
+        function connectMsg(streamId){
+            //游客进入  随机时间戳＋随机字母————>clientId，username  token————>password
+            var timestamp = (new Date()).valueOf()+Math.random().toString(36).replace(/[^a-z]+/g, '');
+            var client = mqtt.connect('ws://54.222.178.124:8083/mqtt',{
+                keepalive:30,
+                clientId:timestamp,
+                username:timestamp,
+                password:'Fy4DmNTjx0iBfupchGpnnYNXGCButweX261vlPLn711b0hFZVQST1whewbutveKU',
+                clean: true
+            }); // you add a ws:// url here
+
+            //client(streamsOpts, options)
+            client.on("connect",function(connack){
+                console.log("connect...");
+            });
+            client.on("reconnect",function(){
+                console.log("reconnect...");
+            });
+            client.on("close",function(){
+                console.log("close...");
+            });
+            client.on("error",function(error){
+                console.log(error);
+            });
+            client.on("offline",function(){
+                console.log("offline...");
+            });
+
+            client.subscribe(streamId);
+
+            client.on('message', function (topic, msg) {
+                _this.topic = topic;
+                var msg = JSON.parse(msg);
+                console.log("msg",msg)
+                switch(msg.type)
+                {
+                    case  "chat":
+                        _this.barrager=msg.metaInfo.displayName+":"+msg.content;
+                        //定义弹幕
+                        _this.item={
+                            img:msg.metaInfo.avatarUrl, //图片
+                            info:_this.barrager, //文字
+                            href:'javascript:void(0)', //链接
+                            close:true, //显示关闭按钮
+                            speed:6, //延迟,单位秒,默认6
+                            // bottom:70, //距离底部高度,单位px,默认随机
+                            color:'#fff', //颜色,默认白色
+                            old_ie_color:'#000000'//ie低版兼容色,不能与网页背景相同,默认黑色
+                        };
+                        console.log("_this.status",_this.status)
+                        if(_this.status){//弹幕状态
+                            $('#container').barrager(_this.item);
+                        }
+                        break;
+                    case  "user.join":
+                    case  "user.leave":
+                    case  "like":
+                        // drawStar();
+                        break;
+                }
+
+            });
+        };
+        //发送消息
+        function sendInfo(msg){
+            $.ajax({
+                url: 'http://api-236221752.cn-north-1.elb.amazonaws.com.cn/v1/rtm/barrage',
+                data:{
+                    topic:_this.topic,
+                    msg:msg
+                },
+                headers:{
+                    Authorization: "Bearer Fy4DmNTjx0iBfupchGpnnYNXGCButweX261vlPLn711b0hFZVQST1whewbutveKU"
+                },
+                type:"post",
+                success:function(data){
+                    data.success&&console.log("data",data)
+                },
+                error:function(error){
+                    error.success&&console.log("error",error)
+                }
+
+            });
+        };
+        //加载视频
+        function load(i){
+            $.fn.barrager.removeAll();
+            connectMsg(_this.playList[i].streamId);
+            _this.player.stop();
+            $("#listUl li.active")&&$("#listUl li.active").removeClass("active");
+            $("#listUl li").eq(i).addClass("active");
+            _this.player.load({
+                sources: [
+                    { type: _this.playList[i].streamUrl.type, src: _this.playList[i].streamUrl.videoUrl }
+                ]
+            });
+        }
+        //获取视频列表
+        function loadVideo(){
+            $.ajax({
+                url:'http://api-sbkt.lycam.tv/streams',
+                data: {
+                    resultsPerPage: 5,
+                    page: 1
+                },
+                headers: {
+                    Authorization: "Bearer kBVEgDLkmgpDz4pGnacZpdR5j7AYXdhOgVEcvfQDlhavkNGzfJoqrr7RgxCjppyx"
+                },
+                type: "get",
+                success: function (data) {
+                    $.each(data.items, function (i, n) {
+                        _this.playList.push({
+                            streamId: n.streamId,
+                            thumbnailUrl: n.thumbnailUrl||"./assets/img/defaultImg.jpg",
+                            streamUrl: videoobj(n.streamUrls)
+                        })
+                    });
+                    var opt="";
+                    for(var i =0;i<_this.playList.length;i++){
+                        opt+='<li index='+i+' style="background-image: url('+_this.playList[i].thumbnailUrl+')"></li>'
+                    }
+                    $("#listUl").html(opt);
+                    // 初始化视频
+                    load(0)
+                }
+            })
+        };
+        function videoobj(streamobj){
+            var videoUrl,typeUrl;
+            if (streamobj.length == 1) {
+                videoUrl = streamobj[0].url;
+                typeUrl = streamobj[0].type;
+            } else if (streamobj.length == 3) {
+//                    优先播放rtmp格式
+                if (streamobj[0].type == "RTMP") {
+                    videoUrl = streamobj[0].url;
+                    typeUrl = streamobj[0].type;
+                } else if(streamobj[1].type == "RTMP"){
+                    videoUrl = streamobj[1].url;
+                    typeUrl = streamobj[1].type;
+                }else{
+                    videoUrl = streamobj[2].url;
+                    typeUrl = streamobj[2].type;
+                }
+            }
+            if (typeUrl == "RTMP") {
+                typeUrl = 'video/flash'
+            } else {
+                typeUrl = 'application/x-mpegurl';
+            }
+            return {type:typeUrl,videoUrl:videoUrl}
+        }
+    })();
+</script>
+</html>
+
+
+

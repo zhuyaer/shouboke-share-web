@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>手播课充值</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <script>
+//        字体图片 自适应屏幕宽高
+        function setRemFontSize(baseSize,baseWidth){
+            var baseSize = baseSize||100,baseWidth = baseWidth||375,
+                    clientWidth = document.documentElement.clientWidth<=480?document.documentElement.clientWidth: 480 ;
+            document.getElementsByTagName('html')[0].style.fontSize = clientWidth*baseSize/baseWidth+'px'
+        }
+        setRemFontSize();
+        window.addEventListener("resize",function(){
+            setTimeout(function(){setRemFontSize();},200)
+        });
+    </script>
+
+    <link rel="stylesheet" href="sbkPayPublic/pay/mb/css/history.css" />
+    <link rel="stylesheet" href="sbkPayPublic/dialog/dialog.css" />
+    <link rel="stylesheet" href="sbkPayPublic/pay/mb/css/index.css" />
+</head>
+<body>
+
+<div class="main">
+    <div class="clearfix">
+        <span class="recharge_account">充值账户</span>
+        <!--<a class="getTid" href="weixin://wap/pay?appid=wx82f23267033b6f68&-->
+        <!--noncestr=z6U2O6T2802EkkL7z1UZ42ieu7qKrXsE&-->
+        <!--package=prepay_id=wx20161008162039b0ef9ef2930018902407&-->
+        <!--timestamp=1475915283&sign=F787739EC20CA550C60F55A9045E9CE3"-->
+        <!--class="getTid">测试微信支付</a>-->
+    </div>
+
+
+    <div class="recharge_con js_recharge_con" id="">
+        <div class="recharge_txt">
+            <input type="text" class="js-uid-ipt" maxlength="11" placeholder="请输入手机号" >
+            <span class="switch-btn js-switch-btn"> </span>
+            <span class="confirm" id="js-confirm-login">确认</span>
+        </div>
+        <div class="recharge_point">
+            <a href="sbkPayPublic/pay/idGuide.html" class="get_id" id="js-get-id-btn" style="height: .15rem;"></a>
+            <p class="point_error"></p>
+        </div>
+        <div class="history-container" id="js-history-con">
+            <ul class="history-list" id="js-history-list">
+                <!--
+                                    <li class="h-item"> 12345  <span class="del-btn js-del-btn">X</span> </li>
+                                    <li class="h-item">555 12345  <span class="del-btn js-del-btn">X</span> </li>
+                                    <li class="h-item">5999 12345  <span class="del-btn js-del-btn">X</span> </li>
+                -->
+            </ul>
+        </div>
+    </div>
+    <!-- 充值用户信息 -->
+    <div class="recharge_user js_recharge_user hide">
+        <div class="user_image">
+            <p>
+                <img class="" src="" alt="" />
+            </p>
+        </div>
+        <div class="user_detail">
+            <p class="user_nick"></p>
+            <p>
+                手机号:<span class="js_user_id"></span>
+            </p>
+        </div>
+        <div class="user_change" id="js-user-change-btn">
+            <p>
+                切换账号
+            </p>
+        </div>
+    </div>
+    <!-- 财富 -->
+    <div class="pay_list_container " id="js_all_goods_list">
+        <div class="wealth" data-key="wx_list" id="wx_list_con">
+        </div>
+    </div>
+
+    <!-- 支付 -->
+    <div class="pay js-channel-list">
+        <ul class="js-channel-ul">
+            <li class="item wechart active" data-channel="wx_list">
+                <div class="pay_detail">
+                    <p>
+                        微信支付
+                    </p>
+                    <p>
+                        微信安全支付
+                    </p>
+                </div>
+                <div class="pay_change"></div>
+            </li>
+            <!--<li class="item ali pay_way hide"  data-channel="alipay_list">-->
+                <!--<div class="pay_detail">-->
+                    <!--<p>-->
+                        <!--支付宝支付-->
+                    <!--</p>-->
+                    <!--<p>-->
+                        <!--支付宝安全支付-->
+                    <!--</p>-->
+                <!--</div>-->
+                <!--<div class="pay_change"></div>-->
+            <!--</li>-->
+        </ul>
+        <!--<div class="pay_more down" id="js_pay_more">-->
+            <!--<p>-->
+                <!--查看更多支付方式-->
+            <!--</p>-->
+        <!--</div>-->
+    </div>
+    <span class="pay_confirm disabled" id="js_pay_confirm">确认支付</span>
+</div>
+
+<!--引导跳转-->
+<div class="tip-mask"><div class="bgblack"> <div class="tip-con"></div></div></div>
+
+<!--alipay跳转-->
+<div id="alipay_form" style="display:none"></div>
+<!--alipay跳转结束-->
+
+<!--callback-->
+<div id="callback_bg" style="display: none">
+    <div id="callback">
+        <div class="d1" id="callback_text"></div>
+        <img src="" id="chenggong">
+        <img src="sbkPayPublic/pay/mb/images/cha.png" class="callback_close">
+    </div>
+</div>
+<!--callback-->
+
+
+
+
+<script id="goods-list-tpl" type="text/template">
+    <div class="diamond_detail {is_send}" data-send="送{send_gold}h" data-money="{money}">
+        <p class="">{getTime}小时</p>
+        <p class="">￥{money}元</p>
+    </div>
+</script>
+</body>
+</html>
+
+
+<script src="sbkPayPublic/pay/mb/js/jquery-1.11.1.min.js"></script>
+<!--<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
+<!--<script src="./sbkPayPublic/pay/mb/js/jweixin-1.0.0.js"></script>-->
+<script src="sbkPayPublic/pay/mb/js/common.js" type="text/javascript"></script>
+<script src="sbkPayPublic/dialog/dialog.js" type="text/javascript"></script>
+<!--<script src="./sbkPayPublic/ebank/pingpp.js" type="text/javascript"></script>-->
+<script src="sbkPayPublic/pay/mb/js/history.js" type="text/javascript"></script>
+<script src="sbkPayPublic/pay/mb/js/index.js" type="text/javascript"></script>

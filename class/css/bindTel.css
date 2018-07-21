@@ -1,0 +1,30 @@
+#header .mui-title{
+	color: #030307;
+	font-size: .17rem;
+	font-weight: normal;
+}
+
+#yzCode{
+	width: 35%;
+	float: left;
+}
+
+#yzCode~label{
+	width: 30%;
+	font-size: .12rem;
+	height: 40px;
+	line-height: 18px;
+}
+
+.mui-input-row label~input{
+	font-size: .16rem;
+}
+
+#bind{
+	width: 3.55rem;
+	margin: .1rem;
+}
+
+.mui-toast-container{
+	bottom: 250px;
+}

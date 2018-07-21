@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ckplayer只调用html5播放器</title>
+</head>
+<body>
+<div id="a1"></div>
+<script type="text/javascript" src="ckplayer/ckplayer.js" charset="utf-8"></script>
+<script type="text/javascript">
+	var flashvars={
+		p:0,
+		e:1,
+		f:'http://hls.ws.lycam.tv/lycam/4052ef20-8224-11e7-bd4a-639e96855747/playlist.m3u8',
+		i:'http://www.ckplayer.com/static/images/cqdw.jpg'
+		};
+	var video=['http://resource-s3.lycam.tv/apps/XPQKR06444/f4d46500-71bc-11e7-8077-e1bb77360d1a/streams/6971f3e0-72cc-11e7-8700-d543f9117187/hls/vod.m3u8'];
+	var support=['all'];
+	CKobject.embedHTML5('a1','ckplayer_a1',600,400,video,flashvars,support);
+</script>
+</body>
+</html>

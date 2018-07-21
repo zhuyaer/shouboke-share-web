@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>手播课</title>
+</head>
+<body>
+    <script type="text/javascript">
+    browerType();
+    function browerType(){
+        var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                //在微信中打开
+                alert('wx')
+        }
+        if (ua.match(/WeiBo/i) == "weibo") {
+                //在新浪微博客户端打开
+                alert('wb')
+        }
+        if (ua.match(/QQ/i) == "qq") {
+                //在QQ空间打开
+                alert('qq')
+        }
+    }
+    </script>
+</body>
+</html>

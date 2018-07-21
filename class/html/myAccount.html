@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport"  content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="utf-8">
+		<title>我的账户</title>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </title>
+		<link rel="stylesheet" href="../css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/myAccount.css"/>
+		<link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
+   		<link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/icon-full.css" rel="stylesheet">
+   		<link rel="stylesheet" href="../css/mui.picker.all.css" />
+		<style>
+			#downTips{
+				position: fixed;
+				left: 50%;
+				top: 50%;
+				width: 2.6rem;
+				height: 3rem;
+				margin: -1.5rem 0px 0px -1.3rem;
+				z-index: 2;
+			}
+			#downInfo{
+				width: 2.6rem;
+				height: 2.4rem;
+				background-color: #ffffff;
+			}
+			#downInfo h4{
+				color: #2B2B2B;
+				font-size: .16rem;
+				text-align: center;
+				position: absolute;
+				margin-top: .4rem;
+				float: left;
+				width: 100%;
+			}
+			#downInfo h5{
+				font-size: .16rem;
+				text-align: center;
+				margin-top: .8rem;
+				color: #c4c4c4;
+				float: left;
+				width: 100%;
+			}
+			#goDown{
+				width:1.3rem;
+				height:.35rem;
+				background:rgba(20,200,100,1);
+				border-radius: .22rem;
+				text-align: center;
+				line-height: .35rem;
+				margin-left: 0.65rem;
+				color: #ffffff;
+				float: left;
+				margin-top: .6rem;
+			}
+			#closeDownTips{
+				margin-top: .5rem;
+				width: .33rem;
+				height: .33rem;
+				margin-left: 1.135rem;
+			}
+			#zz{
+				height: 100%;
+				width: 100%;
+				z-index: 1;
+				position: fixed;
+				left: 0;
+				top: 0;
+				background-color: rgba(0,0,0,0.4);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="block" class="mui-content" style="display: none;">
+			<div id="income">
+				<h5>我的收益（元）</h5>
+				<h4></h4>
+				<h5>可提现</h5>
+				<button id="withdrawals" onclick="withdrawals()" class="mui-btn">提现</button>
+				<div id="incomeInfo">
+					<div>
+						<p></p>
+						<p>课程收益</p>
+					</div>
+					<div>
+						<p></p>
+						<p>分销收益</p>
+					</div>
+					<div>
+						<p></p>
+						<p>已提现</p>
+					</div>
+				</div>
+			</div>
+			<div id="balance">
+				<h5>剩余时长（分钟）</h5>
+				<h4></h4>
+				<button id="recharge" onclick="rechargeClick()" class="mui-btn">充值</button>
+   			</div>
+			<div id="email">
+				<span class="mui-icon mui-icon-email"></span>
+				<span>业务联系 service@lycam.tv</span>
+			</div>
+			<!--<div id="downTips">-->
+				<!--<div id="downInfo">-->
+					<!--<h4>请下载“手播课”</h4>-->
+					<!--<h5>查看课程收益</h5>-->
+					<!--<div id="goDown">去下载</div>-->
+				<!--</div>-->
+				<!--<div id="closeDownTips">-->
+					<!--<img src="../img/closeCount.png" alt=""/>-->
+				<!--</div>-->
+			<!--</div>-->
+   		</div>
+		<!--<div id="zz"></div>-->
+   		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+		<script src="https://cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.all.js"></script>
+		<script src="../js/myAccount.js"></script>
+		<script>
+			mui("#block").on('tap','#incomeInfo',function() {
+				mui.confirm('下载手播课', '查看课程收益', ['否','是'], function(e) {
+					if (e.index == 1) {
+						window.location.href='http://a.app.qq.com/o/simple.jsp?pkgname=tv.lycam.pclass';
+					}
+				})
+			})
+		</script>
+	</body>
+</html>
+
+<!--https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx18e63e75d50cb458&redirect_uri=http://shouboke.tv%2fweChat_web_develop%2fclass%2fhtml%2fmyAccount.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect-->

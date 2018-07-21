@@ -1,0 +1,214 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: .SFNSText-Regular!important;
+}
+
+#title{
+    font-size: .17rem;
+    height: .44rem;
+    text-align: center;
+    line-height: .44rem;
+    color:#030303;
+    background-color: #fafaff;
+}
+
+＃nav,#nav>ul{
+    width: 100%;
+    height: .44rem;
+    background-color: #ffffff;
+}
+
+#nav>ul>li{
+    height: .44rem;
+    list-style: none;
+    float: left;
+    width: 25%;
+    text-align: center;
+    font-size: .15rem;
+    color: #393939;
+    line-height: .44rem;
+}
+
+#nav>ul>li:first-of-type{
+    color: #1f2335;
+    font-size: .17rem;
+}
+
+#coverImg{
+    width: 3.55rem;
+    height: 1.94rem;
+    margin: .1rem;
+    position: relative;
+}
+
+#coverImg>img{
+    width: 3.55rem;
+    height: 1.94rem;
+}
+
+#list,#list>ul{
+    width: 3.75rem;
+    height: 2.2rem;
+}
+
+#list>ul>li{
+    list-style: none;
+    float: left;
+    width: 3.75rem;
+    height: .44rem;
+}
+
+.listInfo{
+    font-size: .17rem;
+    color: #757887;
+    width: .67rem;
+}
+
+#list>ul>li>.listInput{
+    width: 2.5rem;
+    -webkit-appearance: textfield;
+    border: none;
+    padding: 0;
+    height: .21rem;
+    margin-bottom: 0;
+    font-size: .15rem;
+    color: #393939;
+    float: right;
+    text-align: right;
+}
+
+#description{
+    border: none!important;
+    margin-bottom: 0!important;
+    padding: .1rem;
+    font-size: .14rem;
+}
+
+#audience{
+    height: .4rem;
+    width: 3.75rem;
+    font-size: .12rem;
+    background-color: #ffffff;
+    margin-top: -0.07rem;
+}
+
+#audience>button{
+    float: right;
+    margin-right: .1rem;
+    color: #14c864;
+    border-radius: .1rem;
+    background-color: #f0f2f5;
+    padding: .05rem;
+}
+
+#live{
+    width: 3.75rem;
+    height: .54rem;
+    background-color: #ffffff;
+}
+
+#liveButton{
+    width: 3.55rem;
+    margin: .1rem;
+    height: .44rem;
+    background-color: #14c864;
+    font-size: .17rem;
+    color: #ffffff;
+    border-radius: .2rem;
+    margin-bottom: 0;
+}
+
+#camera{
+	position: absolute;
+	width: 3.55rem;
+	height: 1.94rem;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}
+
+.right{
+	float: right;
+}
+
+.right:after{
+    font-family: Muiicons;
+    font-size: inherit;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    -webkit-transform: translateY(-50%);A
+    transform: translateY(-50%);
+    text-decoration: none;
+    color: #bbb;
+    -webkit-font-smoothing: antialiased;
+}
+
+#range,#chooseTeam{
+	width: 3.75rem;
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+}
+
+#rangeHead,#teamHead{
+	height: .44rem;
+	background-color: #ffffff;
+}
+
+#range .range,#chooseTeam .range{
+	width: 33%;
+	float: left;
+	height: .44rem;
+	line-height: .44rem;
+}
+
+.range:nth-of-type(2){
+	text-align: center;
+}
+
+.range:nth-of-type(3){
+	text-align: right;
+	padding-right: .1rem;
+	color: #393939;
+	font-size: .14rem;
+}
+
+#rangeList,#teamList{
+	position: relative;
+	margin-top: .1rem;
+}
+
+#rangeList>ul>li,#teamList>ul>li{
+	padding: 0;
+}
+
+#pwd,.prompt{
+	width: 50%!important;
+	float: none!important;
+	font-size: .14rem!important;
+	color: #393939!important;
+}
+
+#teamList .center{
+	text-align: center;
+}
+
+.mui-toast-container{
+	bottom: 250px;
+}
+
+#list input::-webkit-input-placeholder{
+	color: #CCCCCC;
+}
+
+#list #time::-webkit-input-placeholder,#list #classLength::-webkit-input-placeholder,#list #classPrice::-webkit-input-placeholder{
+	color: #393939;
+}
+
+.mui-toast-container{
+	bottom: 250px;
+}

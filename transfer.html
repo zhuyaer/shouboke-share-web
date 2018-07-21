@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+    pushHistory()
+    function getQueryString(name) { //获取地址栏参数
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+        var r = window.location.search.substr(1).match(reg); 
+        if (r != null) return unescape(r[2]); return null; 
+    } 
+    var cardId=getQueryString('cardId');
+    var streamId=getQueryString('streamId');
+    var distributor=getQueryString('distributor');
+    sessionStorage.setItem('cardId',cardId);
+    alert(cardId)
+    sessionStorage.setItem('streamId',streamId);
+    sessionStorage.setItem('distributor',distributor);
+    browerType();
+    function browerType(){//判断当前浏览器类型
+        var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+        var isPc = /macintosh|window/.test(navigator.userAgent.toLowerCase());
+        if ((ua.match(/MicroMessenger/i) == "micromessenger")&&!isPc) {
+                //在微信中打开
+//                location.href='http://webtest.shouboke.tv/class/html/index.html?state='+streamId;
+        }else if ((ua.match(/WeiBo/i) == "weibo")&&!isPc) {
+                //在新浪微博客户端打开
+//                location.href='https://api.weibo.com/oauth2/authorize?client_id=367727881&response_type=code&redirect_uri=http://shouboke.tv/weChat_web_develop/weiboIndex.html?streamId='+streamId;
+                location.href='https://api.weibo.com/oauth2/authorize?client_id=367727881&response_type=code&redirect_uri=http://shouboke.tv/shareModel/weiboIndex.html?streamId='+streamId;
+        }else if ((ua.match(/QQ/i) == "qq")&&!isPc) {
+                //在QQ空间打开
+                location.href='http://shouboke.tv/shareModel/qqIndex.html?state='+streamId;
+//                location.href='http://shouboke.tv/weChat_web_develop/qqIndex.html?state='+streamId;
+        }else{
+            location.href='http://handsclass.lycam.tv/shareModel/pcIndex.html?state='+streamId;
+        }
+    }
+    function pushHistory() {//防止回退页面出现空白页
+        window.addEventListener("popstate", function(e) {//这里监听到了后退事件
+            self.location.reload();
+        }, false);
+        var state = {
+            title : "",
+            url : "#"
+        };
+        window.history.replaceState(state, "", "#");
+    };
+    </script>
+</body>
+</html>

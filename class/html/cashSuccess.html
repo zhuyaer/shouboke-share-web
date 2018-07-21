@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport"  content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="utf-8">
+    <title>提现成功</title>
+    <link rel="stylesheet" href="../css/mui.min.css"/>
+    <link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/icon-full.css" rel="stylesheet">
+    <style>
+        html,body,.mui-content{
+            background-color: #F4F4F4;
+        }
+        #img{
+            width: 100%;
+            margin-top: .5rem;
+        }
+        #img img{
+            width: .8rem;
+            margin-left: 1.475rem;
+        }
+        #block{
+            display: none;
+        }
+        #successTip{
+            text-align: center;
+            width: 100%;
+            color: #393939;
+            font-size: .2rem;
+            margin-top: .05rem;
+        }
+        .sumTip{
+            color: #868686;
+            font-size: .14rem;
+            margin-top: .3rem;
+            text-align: center;
+        }
+        #sum{
+            font-size: .26rem;
+            color: #393939;
+            text-align: center;
+            margin-top: .05rem;
+        }
+        #back{
+            width:3rem;
+            height:.44rem;
+            background:rgba(20,200,100,1);
+            border-radius: .22rem;
+            margin-left: .375rem;
+            color: #ffffff;
+            text-align: center;
+            line-height: .44rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="block" class="mui-content">
+        <div id="img">
+            <img src="../img/img_OK.png" alt=""/>
+        </div>
+        <p id="successTip">提现成功</p>
+        <p class="sumTip">提现金额</p>
+        <p id="sum"></p>
+        <div id="back">返回我的帐户</div>
+    </div>
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script src="https://cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/mui.min.js"></script>
+<script>
+    mui.init();
+    var sum=getQueryString('sum');//获取提现金额
+    mui('#sum')[0].innerHTML='¥'+sum;
+    load();
+    setTimeout(function(){
+        el.loading('hide');
+    },500)
+    mui(".mui-content").on('tap','#back',function(){
+        location.href='./myAccount.html'
+    })
+    function load(){//加载动画
+        el=Zepto.loading({
+            content:'正在加载中...'
+        })
+        el.on("loading:hide",function(){
+            mui('#block')[0].style.display='block';
+        });
+    }
+</script>
+</body>
+</html>

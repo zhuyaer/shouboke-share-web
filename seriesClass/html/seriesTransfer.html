@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title></title>
+</head>
+<body>
+    <script type="text/javascript">
+    var cardId=getQueryString('cardId');
+    sessionStorage.setItem('cardId',cardId);
+    var streamId=getQueryString('state');
+    sessionStorage.setItem('streamId',streamId);
+    var distributor=getQueryString('distributor');
+    sessionStorage.setItem('distributor',distributor);
+    browerType();
+    function getQueryString(name) { //获取地址栏参数
+        // 获取参数
+        var url = window.location.search;
+        // 正则筛选地址栏
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        // 匹配目标参数
+        var result = url.substr(1).match(reg);
+        //返回参数值
+        return result ? decodeURIComponent(result[2]) : null;
+    }
+    function browerType(){//判断当前浏览器类型
+        var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+        var isPc = /macintosh|window/.test(navigator.userAgent.toLowerCase());
+        if ((ua.match(/MicroMessenger/i) == "micromessenger")&&!isPc) {
+                //在微信中打开
+                location.href='http://shouboke.tv/weChat_web_develop/seriesClass/html/seriesList.html?state='+streamId;
+//                location.href='http://shouboke.tv/seriesClass/html/seriesList.html?state='+streamId;
+        }else if ((ua.match(/WeiBo/i) == "weibo")&&!isPc) {
+                //在新浪微博客户端打开
+                location.href='http://shouboke.tv/weChat_web_develop/seriesClass/html/seriesListByWb.html?state='+streamId;
+//                location.href='http://shouboke.tv/seriesClass/html/seriesListByWb.html?state='+streamId;
+        }else if ((ua.match(/QQ/i) == "qq")&&!isPc) {
+                //在QQ空间打开
+                location.href='http://shouboke.tv/weChat_web_develop/seriesClass/html/seriesListByqq.html?state='+streamId;
+//                location.href='http://shouboke.tv/seriesClass/html/seriesListByqq.html?state='+streamId;
+        }else{
+            window.location.href='http://handsclass.lycam.tv/seriesClass/html/seriesListByPc.html?state='+streamId;
+//            location.href='http://shouboke.tv/shareModel/error.html'
+        }
+    }
+    </script>
+</body>
+</html>

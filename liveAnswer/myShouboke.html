@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="keywords" content="手播课,手播,shouboke">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <meta name="description"
+          content="手播课是有史以来第一款完全基于移动设备的知识分享视频直播工具，能精准传递知识文档、直播视频图像、及时互动沟通，这所有的操作不再局限于时间和地点，完全通过智能手机就可以完成。">
+    <title>手播课</title>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/chosen.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+
+    <link rel="stylesheet" href="assets/css/handsclassUpload.css"/>
+    <link href="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet">
+    <script src="assets/js/jquery-3.0.0.min.js"></script>
+    <script src="assets/js/jquery.extend.js"></script>
+    <script src="assets/js/chosen.jquery.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/qrcode.js"></script>
+    <script src="assets/js/jquery.extend.js"></script>
+    <script src="assets/js/public.js"></script>
+    <script src="https://cdn.bootcss.com/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <!--上传文件相关-->
+    <script src="http://shouboke.tv/sbkUploadResource/js/webuploader.min.js"></script>
+    <script src="assets/js/handsclassUpload.js"></script>
+    <script src="assets/js/imageresizer.js"></script>
+
+    <!--微博登录-->
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=367727881&debug=true"
+            type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/common.js"></script>
+    <!--flowplayer视频播放插件-->
+    <script src="assets/flowplayer/flowplayer.js"></script>
+    <!--flowplayer CSS相关-->
+    <link rel="stylesheet" type="text/css" href="assets/flowplayer/skin/functional.css">
+    <!-- [if lt IE 9]> -->
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- <![endif] -->
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?34cd036fbb2ecfbe9c33f3d4594d1952";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+<header class="clearfix">
+    <div class="container">
+        <div>
+            <img src="assets/img/logo.png">
+        </div>
+        <ul class="clearfix">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="hot.html">热门</a></li>
+            <li><a href="preview.html">预告</a></li>
+            <li><a class="active" href="myShouboke.html">我的手播课</a></li>
+            <li><a href="customerPages/customerLogin.html">经销商入口</a></li>
+            <div class="login">
+                <a id="login" href="#" data-toggle="modal" data-target="#myModal"></a>
+            </div>
+            <div class="login_success">
+                <img id="user_headPic" src="assets/img/user_origin.png" alt=""/>
+                <div class="personal">
+                    <p id="log_out">退出登录</p>
+                </div>
+            </div>
+        </ul>
+    </div>
+</header>
+<p class="charge_item_sub" style="display: none">您还没登录,请先<a href="#" data-toggle="modal" data-target="#myModal">登录</a>!</p>
+<div class="container mySoubokeContent">
+    <ul class="nav nav-tabs mySoubokeTab nav-stacked">
+        <li id="buildClass" class="active" role="createCourse"><a href="javascript:void(0)">新建课程</a></li>
+        <li role="courseList" class="courseList"><a href="javascript:void(0)">我的课程</a></li>
+        <li role="courseWare"><a href="javascript:void(0)">我的课件</a></li>
+        <li role="questions" class="myQuestions"><a href="javascript:void(0)">我的题库</a></li>
+        <li id="upClass" style="display:none" role="uploadcourse"><a href="javascript:void(0)">上传课程</a></li>
+        <li role="charge"><a href="javascript:void(0)">充值</a></li>
+    </ul>
+    <div id="charge">
+        <div id="pay_InfoChoose" class="list_hot" style="display: block;">
+            <!--<div class="list_hot_item list_hot_hd">-->
+            <!--<h3>账户充值</h3>-->
+            <!--</div>-->
+            <div class="charge_item clearfix">
+                <div class="charge_item_son clearfix">
+                    <div class="one">
+                        <img class="user_head" src="" alt=""/>
+                    </div>
+                    <div class="two userId">
+                        <p id="userName"></p>
+                        <p class="userPhone">手机号: <span name="" id="userPhone"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="charge_item_1">
+                <p>请选择充值金额:</p>
+                <ul id="chargeInfo" class="clearfix">
+
+                </ul>
+            </div>
+            <div class="charge_item_1">
+                <p>请选择充值方式:</p>
+                <div class="charge_way">
+                    <ul id="chargeWay" class="clearfix">
+                        <li class="active" id="zhiFuBao"><img src="assets/img/img_zhifubao.png"
+                                                              alt=""/></li>
+                        <li id="weChat"><img src="assets/img/img_weixin.png" alt=""/></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="charge_item_1">
+                <p>应付金额: <span id="charge_value"></span>元</p>
+                <div id="pay_btn">前往支付</div>
+            </div>
+        </div>
+        <div id="pay_aliPay_div" class="list_hot">
+            <div class="pay_zhiFuBao">
+                <div class="pay_zhiFuBao_son">
+                    <p>正在使用支付宝进行支付</p>
+                </div>
+                <div class="pay_zhiFuBao_son_2">
+                    <div>
+                        <img src="assets/img/img_pay_zhifubao.png" alt="支付宝扫码支付"/>
+                    </div>
+                    <div>
+                        <img src="assets/img/img_right.png" alt="right"/>
+                    </div>
+                    <div>
+                        <p class="p1">支付金额: <span id="payCount_aliPay"></span>元</p>
+                        <p class="p2">请在5分钟内完成支付。</p>
+                        <div class="aliPay_box">
+                            <div id="aliPay"></div>
+                        </div>
+                        <p class="p3">请使用支付宝扫描二维码进行支付</p>
+                    </div>
+                    <div>
+                        <a id="back_aliPay" href="javascript:;">返回修改支付信息</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="pay_weChat_div" class="list_hot">
+            <div class="pay_zhiFuBao">
+                <div class="pay_zhiFuBao_son">
+                    <p>正在使用微信进行支付</p>
+                </div>
+                <div class="pay_zhiFuBao_son_2">
+                    <div>
+                        <img src="assets/img/img_pay_weixin.png" alt="微信扫码支付"/>
+                    </div>
+                    <div>
+                        <img src="assets/img/img_right.png" alt="right"/>
+                    </div>
+                    <div>
+                        <p class="p1">支付金额: <span id="payCount_weChat"></span>元</p>
+                        <p class="p2">为确保安全,请尽快完成支付。</p>
+                        <div class="aliPay_box">
+                            <div id="weChatPay"></div>
+                        </div>
+                        <p class="p3">请使用微信扫描二维码进行支付</p>
+                    </div>
+                    <div>
+                        <a id="back_weChat" href="javascript:;">返回修改支付信息</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="courseList">
+        <div>
+        </div>
+        <div class="paginationDiv">
+            <div class="pagination" style="margin-left: 15px;text-align: left;float: left">
+
+            </div>
+        </div>
+        <div id="courseDetail">
+            <div class="classView">
+                <div>
+                    <img src="assets/img/videoCover.png" alt=""/>
+                </div>
+                <div class="classViewInfo">
+                    <h5></h5>
+                    <span></span>
+                </div>
+            </div>
+            <button id="startAnswer" type="button" class="btn btn-success">开始答题</button>
+            <div id="liVing">
+
+            </div>
+            <div id="answerResult">
+                <h4>获奖结果</h4>
+                <ul>
+                    <li>
+                        <p>999</p>
+
+                        <p>参与答题人数</p>
+                    </li>
+                    <li>
+                        <p>99999</p>
+
+                        <p>获奖人数</p>
+                    </li>
+                    <li>
+                        <p>99999999</p>
+
+                        <p>奖金总额</p>
+                    </li>
+                    <li>
+                        <p>99</p>
+
+                        <p>人均奖金</p>
+                    </li>
+                </ul>
+                <button id="publishResult" type="button" class="btn btn-success">公布结果</button>
+            </div>
+            <div style="clear: left;padding-top: 50px">
+                <span >直播题目</span>
+                <div class="list" style="margin-top: 20px">
+
+                </div>
+                <button type="button" class="btn btn-success continueAdd">添加题目</button>
+            </div>
+        </div>
+    </div>
+    <div id="questions">
+        <div id="noQuestion">
+            您的题库还没有题目“<a data-toggle="modal" data-target="#inputQuestion" href="javascript:void(0)">添加题目</a>“
+        </div>
+        <div>
+            <span>题目类型:</span>
+            <select class="questionType">
+                <option value="教育">教育</option>
+            </select>
+            <span>题目难度:</span>
+            <select class="questionDiff">
+                <option value="1">简单</option>
+                <option value="3">一般</option>
+                <option value="5">复杂</option>
+            </select>
+            <button id="addQuestions" data-toggle="modal" data-target="#inputQuestion" type="button" class="btn btn-success">添加题目</button>
+            <div class="list">
+
+            </div>
+        </div>
+        <div class="paginationDiv">
+            <div class="pagination" style="margin-left: 15px;text-align: left;float: left">
+
+            </div>
+        </div>
+        <button id="addToCourse" type="button" class="btn btn-success">添加</button>
+        <button id="replaceQuestion" type="button" class="btn btn-success">替换</button>
+    </div>
+    <div id="createCourse">
+        <ul class="nav nav-tabs">
+            <li role="newCourse"><a href="javascript:void(0)">单课</a></li>
+            <li role="seriesCourse"><a href="javascript:void(0)">系列课</a></li>
+            <li role="liveAnswer" class="active"><a href="javascript:void(0)">直播答题</a></li>
+        </ul>
+        <ol class="breadcrumb">
+            <li><a href="javascript:void(0)">直播答题</a></li>
+            <li class="active">添加题目</li>
+        </ol>
+        <div id="newCourse" style="justify-items: center">
+            <div class="">
+                <div style="padding: 10px;width: 60%">
+                    <div id="courseCover" style="text-align: center;">
+                        <div style="margin:0 auto;width:320px;height:180px;z-index: 1;background: url('./assets/img/img_original_coverpic.png') center;">
+                            <div id="previewer"
+                                 style="vertical-align: middle;z-index: 2;">
+                            </div>
+                        </div>
+                        <input id="filechooser" type="file" accept="image/*"
+                               style="z-index: 1;"/>
+                    </div>
+                    <div class="one">
+                        <textarea style="overflow: hidden;width: 100%;padding: 10px;max-lines: 1"
+                                  id="courseTitle"
+                                  placeholder="请输入课程标题" type="text" name="title"
+                                  value=""></textarea>
+                    </div>
+                    <div class="two">
+                        <textarea
+                                style="overflow-Y:scroll;width: 100%;height: 200px;padding: 10px;"
+                                id="courseDesc" placeholder="请输入课程描述" type="text"
+                                name="description"
+                                value="" height="100%" width="100%"></textarea>
+                    </div>
+                    <div class="categories">
+                        分类：
+                        <select id="categoriesbox" required>
+                        </select>
+                    </div>
+                    <div>
+                        开课时间： <input id="courseStartTime" type="datetime-local"
+                                     value=""/>
+                    </div>
+                    <div>
+                        课程时长：
+                        <select id="courseTime" name="courseTime" title="courseTime">
+                            <option value="0.5h">0.5h</option>
+                            <option value="1h">1h</option>
+                            <option value="1.5h">1.5h</option>
+                            <option value="2h">2h</option>
+                            <option value="2.5h">2.5h</option>
+                            <option value="3h">3h</option>
+                            <option value="3.5h">3.5h</option>
+                            <option value="4h">4h</option>
+                            <option value="4.5h">4.5h</option>
+                            <option value="5h">5h</option>
+                        </select>
+                    </div>
+                    <div class="coursePrice">
+                        课程价格：
+                        <input id="coursePrice" style="text-align: center" placeholder="" maxlength="6"
+                               type="number"
+                               value="0">
+                    </div>
+                    <div class="whocansee">
+                        谁可以看？
+                        <select id="whocansee" name="whocansee" title="whocansee" required>
+                            <option value="public">公共</option>
+                            <option value="team">团队</option>
+                            <option value="password">密码</option>
+                        </select>
+                        <div id="teambox" hidden>
+                        </div>
+
+                        <div id="passwordbox" hidden>
+                            <input id="password" style="text-align: center" placeholder="请输入密码"
+                                   maxlength="6"
+                                   type="number" value="">
+                        </div>
+                    </div>
+
+                    <input class="button" id="submitCourse" type="submit" value="创建课程">
+                </div>
+            </div>
+        </div>
+        <div id="seriesCourse">
+            敬请期待
+        </div>
+        <div id="liveAnswer">
+            <h4>基本信息</h4>
+            <div id="mainInfo">
+                <div class="courseTitle">
+                    <span>课程标题</span>
+                    <input type="text" placeholder="请输入课程标题"/>
+                </div>
+                <div class="beginTime">
+                    <span>开课时间</span>
+                    <input type="datetime-local"/>
+                </div>
+                <div class="bonus">
+                    <span>奖金金额</span>
+                    <input type="number" placeholder="请输入奖金金额"/>
+                </div>
+                <div class="place">
+                    <span>所在地区</span>
+                    <input type="text" placeholder="请输入所在地区"/>
+                </div>
+                <div class="schoolName">
+                    <span>学校名称</span>
+                    <input type="text" placeholder="请输入学校名称"/>
+                </div>
+            </div>
+            <h4 style="margin-top: 30px">直播封面</h4>
+            <div style="height: 200px">
+                <div id="liveCover">
+                    <input type="file" onchange="uploadImg(this,'cover')" accept="image/*">
+                </div>
+                <span class="coverTip">课程封面大小不超过 5m 封面尺寸 16:9（推荐1920X1080）</span>
+            </div>
+            <h4 style="margin-top: 30px;width: 100px">海报</h4>
+            <div style="height: 200px">
+                <div id="livePoster">
+                    <input type="file" onchange="uploadImg(this,'poster')" accept="image/*">
+                </div>
+                <span class="coverTip">课程海报大小不超过 5m 封面尺寸 16:9（推荐1920X1080）</span>
+            </div>
+            <button id="sureBuild" type="button" class="btn btn-success">创建课程</button>
+        </div>
+        <div id="questionList">
+            <span>题目类型:</span>
+            <select class="questionType">
+                <option>教育</option>
+                <option>地理</option>
+                <option>娱乐</option>
+                <option>影视</option>
+                <option>美食</option>
+            </select>
+            <span>题目难度:</span>
+            <select class="questionType">
+                <option>简单</option>
+                <option>一般</option>
+                <option>复杂</option>
+            </select>
+            <div class="list">
+                <div class="listItem">
+                    <input type="radio" name="questions">
+                    <span class="questionNum">1.</span>
+                    <span class="questionDes">四川话中摆龙门阵是什么意思</span>
+                    <ul>
+                        <li>A.聊天</li>
+                        <li>B.打麻将</li>
+                        <li>C.打架</li>
+                    </ul>
+                </div>
+                <div class="listItem">
+                    <input type="radio" name="question">
+                    <span class="questionNum">1.</span>
+                    <span class="questionDes">四川话中摆龙门阵是什么意思</span>
+                    <ul>
+                        <li>A.聊天</li>
+                        <li>B.打麻将</li>
+                        <li>C.打架</li>
+                    </ul>
+                </div>
+                <div class="listItem">
+                    <input type="radio" name="question">
+                    <span class="questionNum">1.</span>
+                    <span class="questionDes">四川话中摆龙门阵是什么意思</span>
+                    <ul>
+                        <li>A.聊天</li>
+                        <li>B.打麻将</li>
+                        <li>C.打架</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="paginationDiv">
+                <div class="pagination" style="margin-left: 15px;text-align: left;float: left">
+
+                </div>
+                <button id="sureAdd" type="button" class="btn btn-success">确认</button>
+            </div>
+        </div>
+        <!--新创建的题目-->
+        <div id="questionView">
+            <div class="classView">
+                <div>
+                    <img src="assets/img/videoCover.png" alt=""/>
+                </div>
+                <div class="classViewInfo">
+                    <h5>我是一个标题</h5>
+                    <span>奖金：¥ 1000000</span>
+                    <span>答题时间： 2018-03-10 12:00:00</span>
+                </div>
+            </div>
+            <div style="clear: left;padding-top: 50px">
+                <span >直播题目</span>
+                <div class="list" style="margin-top: 20px">
+
+                </div>
+                <button id="publishLive" type="button" class="btn btn-success">发起直播</button>
+                <button id="continueAdd" type="button" class="btn btn-success continueAdd">添加题目</button>
+            </div>
+        </div>
+    </div>
+    <div id="courseWare">
+        <div class="pos">
+            <div class="bigBox">
+                <!--<button id="sureDelete" type="button" onClick="deleteModal()">dsadsadasasdsadasdas</button>-->
+                <div class="left_content">
+                    <!--<h2>-->
+                    <!--<img src="http://shouboke.tv/sbkUploadResource/icons/img_logo.png" alt="logo"/>-->
+                    <!--</h2>-->
+                    <div id="file-uploader" class="choose_con">
+                        <form action="upload.html" method="post" enctype="multipart/form-data">
+                            <div class="inputCenter">
+                                <div id="localImag">
+                                    <img class="upload-imgpre" id="preview"
+                                         src="http://shouboke.tv/sbkUploadResource/img/pdf.png"/>
+                                    <p id="fileName">文件名</p>
+                                </div>
+                                <div class="" id="upfile">
+                                    <img src="http://shouboke.tv/sbkUploadResource/img/icon_add.png"/>
+                                </div>
+                                <div style="margin-top: 55px;"><span style="color: red;">*</span>注意:可上传PDF(大小不能超过18M)，视频，图片格式。
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- left table contents -->
+                <div class="right_content">
+                    <div class="list_hot_item list_hot_hd">
+                        <h3>文件列表</h3>
+                    </div>
+                    <div id="filesContent" class="choose_con1">
+                        <dl class="filesTable" cellspacing="0" cellpadding="0">
+                            <div class="fileListContainer" id="fileListContainer">
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="uploadcourse">
+        <div class="list_hot">
+            <!--<div class="list_hot_item list_hot_hd">-->
+            <!--<h3>我的课程列表</h3>-->
+            <!--</div>-->
+            <div id="uploadCourseList" class="uploadCourseList">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="clearfix">
+    <div>
+        <ul class="clearfix">
+            <li><a href="#">隐私政策</a></li>
+            <li><a href="#">服务条款</a></li>
+            <li><a class="special" href="aboutUs.html">联系我们</a></li>
+        </ul>
+        <p>成都铼看科技有限公司</p>
+        <p>成都铼看科技有限公司版权所有&copy;2016蜀ICP备15008658号-2</p>
+    </div>
+</footer>
+<!--弹出层视频框-->
+
+<!--题库录入题目弹窗-->
+<div id="inputQuestion" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row" class="question">
+                    <span>题目</span>
+                    <input id="question" type="text" placeholder="请输入题目"/>
+                </div>
+                <div class="row">
+                    <span>选项A</span>
+                    <input name="option1" type="text" placeholder="请输入备选项"/>
+                </div>
+                <div class="row option">
+                    <span>选项B</span>
+                    <input name="option2" type="text" placeholder="请输入备选项"/>
+                </div>
+                <div class="row option">
+                    <span>选项C</span>
+                    <input name="option3" type="text" placeholder="请输入备选项"/>
+                </div>
+                <div class="row">
+                    <span>正确选项</span>
+                    <select class="trueOption">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                    <span>分类</span>
+                    <select class="questionType">
+                        <option value="教育">教育</option>
+                        <option>地理</option>
+                        <option>娱乐</option>
+                        <option>影视</option>
+                        <option>美食</option>
+                    </select>
+                    <span>难度</span>
+                    <select class="questionDiff">
+                        <option value="1">简单</option>
+                        <option value="3">一般</option>
+                        <option value="5">困难</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="sureInput" type="button" class="btn btn-success">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+<!--题库修改题目弹窗-->
+<div id="editQuestion" class="modal fade" role="dialog">
+    <div class="modal-dialog" roleditQuestione="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row questionDes">
+                    <span>题目</span>
+                    <input type="text" placeholder="请输入题目"/>
+                </div>
+                <div class="row">
+                    <span>选项A</span>
+                    <input name="option1" type="text" placeholder="请输入备选项"/>
+                </div>
+                <div class="row option">
+                    <span>选项B</span>
+                    <input name="option2" type="text" placeholder="请输入备选项"/>
+                </div>
+                <div class="row option">
+                    <span>选项C</span>
+                    <input name="option3" type="text" placeholder="请输入备选项"/>
+                </div>
+                <div class="row">
+                    <span>正确选项</span>
+                    <select class="trueOption">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                    <span>分类</span>
+                    <select class="questionType">
+                        <option value="教育">教育</option>
+                        <option>地理</option>
+                        <option>娱乐</option>
+                        <option>影视</option>
+                        <option>美食</option>
+                    </select>
+                    <span>难度</span>
+                    <select class="questionDiff">
+                        <option value="1">简单</option>
+                        <option value="3">一般</option>
+                        <option value="5">困难</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button id="sureEdit" type="button" class="btn btn-success">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div id="videoBox" class="myshoubokeCourse">
+    <div id="videoContent">
+        <i class="icon" id="closebtn">
+            <img style="width: 34px;" src="assets/img/close.png" alt="closeImg"/>
+        </i>
+        <div id="video" style="width: 800px;height:450px">
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="modal-body-1 clearfix">
+                    <div>
+                        <h3>欢迎回来</h3>
+                    </div>
+                    <form>
+                        <fieldset>
+                            <div class="login_item">
+                                <input id="user" type="text" name="user" placeholder="请输入用户名/手机号"/>
+                            </div>
+                            <div class="login_item">
+                                <input id="pass" type="password" name="pass" placeholder="请输入密码"/>
+                            </div>
+                            <div class="login_item">
+                                <span id="login_btn" class="login_btn">登录</span>
+                            </div>
+                            <div class="login_item">
+                                <span class="error_tip"></span>
+                                <span class="forget_pass"><a href="#">忘记密码?</a></span>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-body-2">
+                    <h3>第三方登录</h3>
+                    <div class="wb_login_btn"><img src="assets/img/icon_weibo.png"/>新浪微博登录</div>
+                    <div><img src="assets/img/icon_weixin.png"/>微信账号登录</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除我的课件 -->
+<div id="deleteBigBox">
+    <div class="deleteBoxCover"></div>
+    <div class="deleteContent">
+        <h3>确认删除</h3>
+        <p class="deleteText">删除以后不可恢复，确认删除吗?</p>
+
+        <div class="buttonList">
+            <button id="sureDelete" type="button">确定</button>
+            <button id="cancelDelete" type="button">取消</button>
+        </div>
+    </div>
+</div>
+<script src="assets/js/jquery.pagination.js"></script>
+<script src="assets/js/myCourse.js"></script> <!-- 我的课程 -->
+<script>
+    $(function () {
+        var _this = {};
+        _this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        init();
+        function init() {
+            var activeDiv = $('.mySoubokeTab>li.active').attr('role');
+
+            var url = 'http://chaxun.1616.net/s.php?type=ip&output=json&callback=?&_=' + Math.random();
+            $.getJSON(url, function (data) {
+                //           console.log("显示：IP【"+data.Ip+"】 地址【"+data.Isp+"】 浏览器【"+data.Browser+"】 系统【"+data.OS+"】");
+                _this.ip = data.Ip;
+            });
+
+            _this.n = 0;  //定义一个全局的变量n并且初始化为0,用于后面动态替换课程的封面背景图片
+            _this.totalItems = 0;  //定义一个全局的totalItems,用于点击加载更多时,以分页形式向后台请求数据
+            _this.totalUploadItems = 0;
+            if (_this.userInfo === null) {
+                $('.mySoubokeContent').hide();
+                $('.mySoubokeTab').hide();
+                $('.charge_item_sub').show();
+            } else {
+                $('.mySoubokeContent').show();
+                $('.mySoubokeTab').show();
+                $('.charge_item_sub').hide();
+                $('#' + activeDiv).show();
+
+                $('#chargeWay li').each(function (index, i) {
+                    $(this).click(function () {
+                        $('#chargeWay li.active').removeClass('active');
+                        $('#chargeWay li').eq(index).addClass('active'); //  导航切换样式改变
+                    });
+                });
+
+                $('#pay_aliPay_div').hide();
+                $('#pay_weChat_div').hide();
+                $('#pay_InfoChoose').show();
+                //获取充值的价格list和优惠
+                getChargeInfo();
+//                initVideo();
+
+                //
+
+                initReadyCourse();
+            }
+            bindEvent();
+        }
+
+        function getChargeInfo() {
+            $.ajax({
+                url: $.serverHttp + '/team/chargeConfig',
+                headers: {
+                    Authorization: 'Bearer ' + _this.userInfo.token.token
+                },
+                type: 'get',
+                success: function (data) {
+                    var length = data.amount.length;
+                    var chargeItems = '';
+                    for (var i = 0; i < length; i++) {
+                        chargeItems += '<li><span>' + data.amount[i].money + '</span>元</li>';
+                    }
+                    $('#chargeInfo').html(chargeItems);
+                    $('#charge_value').html(data.amount[0].money);  //默认充值获取的第一个价格
+                    //选择充值价格样式控制
+                    $('#chargeInfo li:first-child').addClass('active');
+                    $('#chargeInfo li').each(function (index, i) {
+                        $(this).click(function () {
+                            $('#chargeInfo li.active').removeClass('active');
+                            $('#chargeInfo li').eq(index).addClass('active'); //  导航切换样式改变
+                            $('#charge_value').html(($(this).html()).replace(/[^0-9]/ig, ''));
+                        });
+                    });
+                },
+                error: function (error) {
+                    console.log('getChargeIndoError', error);
+                }
+            });
+        }
+
+        function initVideo(searchContent) {
+            _this.player = flowplayer($('#video'), {
+                splash: true,
+                ratio: 0.4167,
+                autoplay: true,
+                autoBuffering: true, //自动缓冲
+                adaptiveRatio: true,
+                swf: 'http://handsclass.oss-cn-shenzhen.aliyuncs.com/assets/flowplayer/flowplayer.swf',
+                swfHls: 'http://handsclass.oss-cn-shenzhen.aliyuncs.com/assets/flowplayer/flowplayerhls.swf',
+                clip: {
+                    sources: [
+                        {
+                            type: '',
+                            src: ''
+                        }
+                    ]
+                }
+            });
+            $.ajax({
+                url: $.serverHttp + '/user/streams',
+                headers: {
+                    Authorization: 'Bearer ' + _this.userInfo.token.token
+                },
+                type: 'get',
+                data: {
+                    status: 'over',
+                    page: 1,
+                    resultsPerPage: 20,
+                    keyword: searchContent
+                },
+                success: function (data) {
+                    $('#login_success').show();
+                    $('.list_hot_item').show();
+                    $('#search').show();
+                    if (data.totalItems == 0) {
+                        $('#noMore').show();
+                        $('#loadMore').hide();
+                        $('.myCourseList').hide();
+                    } else {
+                        $('#loadMore').css('display', 'inline-block');
+                        $('#noMore').hide();
+                    }
+                    _this.totalItems = data.totalItems;  //初始化,获取一共有多少条数据
+                    _this.page = Math.ceil(_this.totalItems / 20);  //每一页20条数据,计算一共有多少页
+                    _this.initPage = (_this.page - (_this.page - 1)) + 1;  //第一次点击loadMore,加载第2页
+                    _this.currentPage = _this.initPage; //当前加载页,存为全局变量,便于修改以及用于请求,第一次点击是加载第2页。
+                    var hotList = '';
+                    var length = data.items.length;
+                    for (var i = 0; i < length; i++) {
+                        hotList += '<div class="myCourseItem clearfix">' +
+                            '<div class="div_1 clearfix">' +
+                            '<div class="son1" stream="' + data.items[i].streamId + '">' +
+                            '<div class="myCourseHover"><img src="assets/img/hover_play.png"></div>' +
+                            '</div>' +
+                            '<div class="son2">' +
+                            '<p class="p1">' + data.items[i].title + '</p>' +
+                            '<p class="p2">结束时间:&nbsp;&nbsp;<span>' + formatDate(data.items[i].timeFinished, 'yyyy-MM-dd HH:mm') + '</span></p>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="div_2 clearfix">' +
+                            //   href="http://54.223.51.182:6572/video/'+data.items[i].streamId+'/'+data.items[i].title+'"
+                            '<a class="download" target="_self" para1="' + data.items[i].streamId + '" para2="' + data.items[i].title + '">下载</a>' +
+                            //                                            '<p>125M</p>'+
+                            '</div>' +
+                            '</div>';
+                    }
+                    $('.myCourseList').html(hotList);
+                    //替换背景封面图片
+                    for (var i = 0; i < length; i++) {
+                        $('.list_hot .myCourseList .myCourseItem .div_1 .son1').eq(i).css('background-image', 'url(' + data.items[i].thumbnailUrl + ')');
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function loadMoreVideo(searchContent) {
+            $.ajax({
+                url: $.serverHttp + '/user/streams',
+                headers: {
+                    Authorization: 'Bearer ' + _this.userInfo.token.token
+                },
+                type: 'get',
+                data: {
+                    status: 'over',
+                    page: _this.currentPage,
+                    resultsPerPage: 20,
+                    keyword: searchContent
+                },
+                success: function (data) {
+                    if (!data.nextPageAvailable) {
+                        $('#loadMore').hide();
+                        $('#no_more').show();
+                    }
+                    _this.totalItems -= 20; //每加载一次,数量减去一页的数量
+                    _this.currentPage += 1; //加载完成以后_this.currentPage++
+                    var hotList = '';
+                    var length = data.items.length;
+                    for (var i = 0; i < length; i++) {
+                        hotList += '<div class="myCourseItem clearfix">' +
+                            '<div class="div_1 clearfix">' +
+                            '<div class="son1" stream="' + data.items[i].streamId + '">' +
+                            '<div class="myCourseHover"><img src="assets/img/hover_play.png"></div>' +
+                            '</div>' +
+                            '<div class="son2">' +
+                            '<p class="p1">' + data.items[i].title + '</p>' +
+                            '<p class="p2">结束时间:&nbsp;&nbsp;<span>' + formatDate(data.items[i].timeFinished, 'yyyy-MM-dd HH:mm') + '</span></p>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="div_2 clearfix">' +
+                            '<a class="download" target="_self" onclick="downloadVideo(`' + data.items[i].streamId + '`,`' + data.items[i].title + '`);">下载</a>' +
+                            //                                                        '<p>125M</p>'+
+                            '</div>' +
+                            '</div>';
+                    }
+                    $('.myCourseList').append(hotList);
+
+                    //动态替换封面背景图片
+                    var indexMin = 20 + 20 * _this.n;  //第一次点击加载更多按钮时,n为0,eq(item)为第20-39个
+                    var indexMax = 40 + 20 * _this.n;  //第二次点击时,为40-69,以20(为每一页展示的内容个数)个一页以此类推
+                    var count = 0;  //count用于计算循环次数
+                    for (var item = indexMin; item < indexMax;) {
+                        count++;  //第一次循环时,count==1
+                        if (count == 1) {
+                            for (var i = 0; i < length; i++) {  //封面背景图片,从请求到的data的第0个开始循环获取
+                                count++;
+                                $('.list_hot .myCourseList .myCourseItem .div_1 .son1').eq(item).css('background-image', 'url(' + data.items[i].thumbnailUrl + ')');
+                                item++;
+                            }
+                        } else {
+                            break;  //循环一次就跳出,否则。。。会循环20次!阔怕~~~
+                        }
+                    }
+                    _this.n++;  //每点一次加载更多,n++
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function downloadVideo(streamId, title) {
+            $.ajax({
+                url: 'http://54.223.51.182:6572/video/' + streamId + '/' + title,
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 'ok') {
+                        var url = 'http://54.223.51.182:6572' + data.message;
+                        var elemIF = document.createElement('iframe');
+                        elemIF.src = url;
+                        elemIF.style.display = 'none';
+                        document.body.appendChild(elemIF);
+                    } else {
+                        alert('下载出错,请重试!');
+                    }
+                }
+            });
+        }
+
+        function stopPlay() {
+            //      停止播放
+            _this.player.stop();
+            _this.player.unload();
+            $('#videoBox').css('display', 'none');
+        }
+
+        function loadSignalVideo(streamId) {
+            $.ajax({
+                url: $.serverHttp + '/stream/show',
+                data: {
+                    streamId: streamId,
+                    type: 'join'
+                },
+                headers: {
+                    Authorization: 'Bearer ' + _this.userInfo.token.token
+                },
+                type: 'get',
+                success: function (data) {
+                    _this.player.load({
+                        sources: [
+                            {type: 'application/x-mpegurl', src: data.streamUrl}
+                        ]
+                    });
+                    $('#videoBox').css('display', 'block');
+                },
+                error: function (err) {
+                    //                    console.log("loadSingalVedioErrData",err);
+                }
+            });
+        }
+
+        function bindEvent() {
+            $("#inputQuestion #sureInput").click(function(){//创建题目
+                var data={};
+                data.quiz={};
+                var question=$('#inputQuestion #question').val();
+                var option1={};
+                var option2={};
+                var option3={};
+                var options=[];
+                option1.correct=false;
+                option2.correct=false;
+                option3.correct=false;
+                option1.content=$('#inputQuestion input[name="option1"]').val();
+                option2.content=$('#inputQuestion input[name="option2"]').val();
+                option3.content=$('#inputQuestion input[name="option3"]').val();
+                if(trueOption=='A'){
+                    option1.correct=true;
+                }else if(trueOption=='B'){
+                    option2.correct=true;
+                }else{
+                    option3.correct=true;
+                }
+                options.push(option1);
+                options.push(option2);
+                options.push(option3);
+                data.quiz.options=options;
+                data.quiz.question=question;
+                data.quiz.category=questionType;
+                data.quiz.difficulty=Number(questionDiff);
+                if(question&&option1.content&&option2.content&&option3.content){
+                    $.ajax({
+                        url: $.serverHttp + '/api/quiz',
+                        headers: {
+                            Authorization: 'Bearer ' + _this.userInfo.token.token
+                        },
+                        contentType: 'application/json',
+                        type: 'post',
+                        data: JSON.stringify(data),
+                        success: function (data) {
+                            clearInput();//添加题目成功后清空输入框
+                            $('.mySoubokeContent .myQuestions').click();
+                        },
+                        error: function (error) {
+                            console.log('error', error);
+                        }
+                    });
+                    $('#inputQuestion').modal('hide')
+                }else{
+                    swal({
+                        title: "提示",
+                        text: "题目未填写完整",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
+            });
+            $('.paginationDiv').on('click','#sureAdd',function(){
+                $('#questionList').hide();
+                $('#createCourse>ol').hide();
+                $('#createCourse>ol').show();
+                $('#questionList').show();
+                $('#questionList>#paginationDiv').hide();
+            })
+            //tab切换
+            $('.mySoubokeTab').on('click', 'li', function () {
+                checkShow=false;
+                replaceShow=false;
+                var activeDiv = $(this).attr('role');
+                $('.mySoubokeTab>li.active') && $('.mySoubokeTab>li.active').removeClass('active');
+                $(this).addClass('active');
+                $('.mySoubokeContent>div').hide();
+                $('#' + activeDiv).show();
+                if(activeDiv=='courseList'){
+                    $('#courseList>div:first-child').show();
+                    $('#courseList .paginationDiv').show();
+                    $('.living .result').hide();
+                    $('#courseDetail').hide();
+                    getUserVideo(1);
+                }else if(activeDiv=='questions'){//每次重新进入题库时清空已添加题目数组addIds
+                    getQuizzs(1);
+                    addIds=[];
+                }
+            });
+            $('#createCourse ul').on('click', 'li', function () {
+                var activeDiv = $(this).attr('role');
+                $('#createCourse li.active') && $('#createCourse li.active').removeClass('active');
+                $(this).addClass('active');
+                $('#createCourse>div').hide();
+                $('#' + activeDiv).show();
+            });
+            //充值
+            $('#pay_btn').click(function () {
+                var userName = $('#userName').html();
+                var userPhone = $('#userPhone').html();
+                var payMoney = $('#charge_value').html();
+                if (userName == '' || userPhone == '') {
+                    alert('请先登录!');
+                } else {
+                    if ($('#zhiFuBao').hasClass('active')) {  //支付宝充值
+                        $('#payCount_aliPay').html(payMoney);
+                        $('#pay_aliPay_div').show();
+                        $('#pay_weChat_div').hide();
+                        $('#pay_InfoChoose').hide();
+                        _this.timer = null;
+                        $.ajax({
+                            url: $.serverHttp + '/3/alipay/qr/create',
+                            headers: {
+                                Authorization: 'Bearer ' + _this.userInfo.token.token
+                            },
+                            type: 'post',
+                            data: {
+                                type: 'user',
+                                amount: +payMoney
+                            },
+                            success: function (data) {
+                                var out_trade_no = data.out_trade_no;
+                                new QRCode('aliPay', {
+                                    text: data.qr_code,
+                                    width: 268,
+                                    height: 268,
+                                    colorDark: '#000000',
+                                    colorLight: '#ffffff',
+                                    correctLevel: QRCode.CorrectLevel.H
+                                });
+                                _this.timer = setInterval(function () {
+                                    payStatus(out_trade_no);
+                                }, 3000);
+                            },
+                            error: function (error) {
+                                console.log('aliPayError', error);
+                            }
+                        });
+
+                        function payStatus(out_trade_no) {
+                            $.ajax({
+                                url: $.serverHttp + '/3/alipay/query',
+                                headers: {
+                                    Authorization: 'Bearer ' + _this.userInfo.token.token
+                                },
+                                type: 'post',
+                                dataType: 'json',
+                                data: {
+                                    out_trade_no: out_trade_no
+                                },
+                                success: function (data) {
+                                    data.parse;
+                                    if (data.alipay_trade_query_response.trade_status == 'TRADE_SUCCESS') {
+                                        clearInterval(_this.timer);
+                                        window.location.href = 'paySuccess.html';
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log('aliPayStatusError', error);
+                                }
+                            });
+                        }
+
+                    } else {  //微信充值
+                        $('#payCount_weChat').html(payMoney);
+                        $('#pay_aliPay_div').hide();
+                        $('#pay_weChat_div').show();
+                        $('#pay_InfoChoose').hide();
+                        //                    console.log("ip",ip);
+
+                        var payMoneyFee = payMoney * 100;
+                        console.log('payMoneyFee', payMoneyFee);
+
+                        _this.timer_weChat = null;
+                        $.ajax({
+                            url: $.serverHttp + '/3/weixinpay/unifiedorder',
+                            headers: {
+                                Authorization: 'Bearer ' + _this.userInfo.token.token
+                            },
+                            type: 'post',
+                            data: {
+                                type: 'user',
+                                body: '手播课充值',
+                                total_fee: payMoneyFee,
+                                spbill_create_ip: _this.ip,
+                                trade_type: 'NATIVE'
+                            },
+                            success: function (data) {
+                                //                            console.log(typeof(data.out_trade_no));
+                                var out_trade_no = data.out_trade_no;
+                                new QRCode('weChatPay', {
+                                    text: data.code_url,
+                                    width: 268,
+                                    height: 268,
+                                    colorDark: '#000000',
+                                    colorLight: '#ffffff',
+                                    correctLevel: QRCode.CorrectLevel.H
+                                });
+                                _this.timer_weChat = setInterval(function () {
+                                    weChatPayStatus(out_trade_no);
+                                }, 3000);
+                            },
+                            error: function (error) {
+                                console.log('weChatPayError', error);
+                            }
+                        });
+
+                        function weChatPayStatus(out_trade_no) {
+                            $.ajax({
+                                url: $.serverHttp + '/3/weixinpay/orderquery',
+                                headers: {
+                                    Authorization: 'Bearer ' + _this.userInfo.token.token
+                                },
+                                type: 'post',
+                                dataType: 'json',
+                                data: {
+                                    out_trade_no: out_trade_no
+                                },
+                                success: function (data) {
+                                    data.parse;
+                                    if (data.trade_state == 'SUCCESS') {
+                                        clearInterval(_this.timer_weChat);
+                                        window.location.href = 'paySuccess.html';
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log('weChatPayStatusError', error);
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+            //返回选择支付方式
+            $('#back_aliPay').click(function (e) {
+                e.preventDefault();
+                $('#pay_aliPay_div').hide();
+                $('#pay_weChat_div').hide();
+                $('#pay_InfoChoose').show();
+                $('#aliPay').empty();
+                clearInterval(_this.timer);
+            });
+            $('#back_weChat').click(function (e) {
+                e.preventDefault();
+                $('#pay_aliPay_div').hide();
+                $('#pay_weChat_div').hide();
+                $('#pay_InfoChoose').show();
+                $('#weChatPay').empty();
+                clearInterval(_this.timer_weChat);
+            });
+            //下载视频
+            $('#myCourseList').on('click', '.myCourseItem .div_2 .download', function () {
+                var streamId = $(this).attr('para1');
+                var title = $(this).attr('para2');
+                downloadVideo(streamId, title);
+            });
+            //停止视频播放
+            $('#closebtn').click(function () {
+                stopPlay();
+            });
+            //搜索视频
+            $('#submitSearch').click(function () {
+                var searchContent = $('#searchContent').val();
+                initVideo(searchContent);
+            });
+
+            $('#searchContent').keydown(function (e) {
+                var searchContent = $('#searchContent').val();
+                if (e && e.keyCode == 13) {  //按enter触发login事件
+                    // 处理事件
+                    initVideo(searchContent);
+                }
+            });
+
+            $('#myCourseList').on('mouseenter', '.myCourseItem .div_1 .son1', function () {
+                $(this).find('div').css('display', 'block');
+            });
+            $('#myCourseList').on('mouseleave', '.myCourseItem .div_1 .son1', function () {
+                $(this).find('div').css('display', 'none');
+            });
+
+            $('#myCourseList').on('click', '.myCourseItem .div_1 .son1', function () {
+                var streamId = $(this).attr('stream');
+                $(this).find('div').css('display', 'none');
+                loadSignalVideo(streamId);
+            });
+            $('#loadMore').click(function () {
+                var searchContent = $('#searchContent').val();
+                loadMoreVideo(searchContent);
+            });
+            // 创建视频相关
+            $('#whocansee').change(function () {
+                var index = this.options[this.selectedIndex].value;
+                var $teambox = $('#teambox');
+                var $passwordbox = $('#passwordbox');
+                $teambox.empty();
+                switch (index) {
+                    case 'public':
+                        $teambox.hide();
+                        $passwordbox.hide();
+                        break;
+                    case 'team':
+                        $teambox.show();
+                        $passwordbox.hide();
+                        $.ajax({
+                            url: $.serverHttp + '/user/team/list',
+                            headers: {
+                                Authorization: 'Bearer ' + _this.userInfo.token.token
+                            },
+                            type: 'get',
+                            data: {},
+                            success: function (data) {
+                                for (var i = 0; i < data.items.length; i++) {
+                                    var item = data.items[i];
+                                    $('#teambox').append('<label><input name="teamlist" style="margin: 6px;" type="checkbox" value="' + item.id + '"/>' + item.name + '</label>');
+                                }
+                            },
+                            error: function (error) {
+                                console.log('teamlist', error);
+                            }
+                        });
+                        break;
+                    case 'password':
+                        $passwordbox.show();
+                        $teambox.hide();
+                        break;
+                }
+            });
+            $.ajax({
+                url: $.serverHttp + '/v4/categories',
+                headers: {
+                    Authorization: 'Bearer ' + _this.userInfo.token.token
+                },
+                type: 'get',
+                data: {},
+                success: function (data) {
+                    var hotList = '';
+                    for (var i = 0; i < data.items.length; i++) {
+                        var item = data.items[i];
+                        hotList += '<option value="' + data.items[i] + '">' + data.items[i] + '</option>';
+                    }
+                    $('#categoriesbox').html(hotList);
+                },
+                error: function (error) {
+                    console.log('categories', error);
+                }
+            });
+            var $previewer = $('#previewer');
+            var $filechooser = $('#filechooser');
+            $filechooser.change(function () {
+                /* 获取文件类型 */
+                const fileType = this.files[0].type,
+                        /* 获取时间戳 */
+                    timestamp = Date.now(),
+                        /* 创建文件 */
+                    image = document.createElement('img'),
+                        /* 实例化文件读取 */
+                    reader = new FileReader();
+                /* 错误处理 */
+                if (/^image\//.test(fileType) === false) return;
+                /* 图片展示 */
+                reader.onload = function (e) {
+                    /* 添加路径  */
+                    image.id = 'coverImage';
+                    image.src = e.target.result;
+                    image.width = 320;
+                    image.height = 180;
+                    /* 插入元素 */
+                    $previewer.empty();
+                    $previewer.append(image);
+                };
+                /* 读取文件 */
+                reader.readAsDataURL(this.files[0]);
+            });
+
+            $('#submitCourse').click(function () {
+                var title = $('#courseTitle').val();
+                var desc = $('#courseDesc').val();
+                var startTime = $('#courseStartTime').val().replace('T', ' ');
+                var time = $('#courseTime').val();
+                var price = parseInt($('#coursePrice').val());
+                var whocansee = $('#whocansee').val();
+                var category = $('#categoriesbox').val();
+                var data = {};
+                switch (whocansee) {
+                    case 'public':
+                        data = {
+                            ifCharge: price > 0,
+                            charge: price === null ? 0 : price,
+                            title: title,
+                            description: desc,
+                            startTime: startTime,
+                            duration: time,
+                            category: category
+                        };
+                        break;
+                    case 'team':
+
+                        var teamlist = [];
+                        $('input[name="teamlist"]:checked').each(function () {
+                            teamlist.push($(this).val());//向数组中添加元素
+                        });
+                        var tid = teamlist.join(',');//将数组元素连接起来以构建一个字符串
+                        data = {
+                            tid: tid,
+                            privacy: true,
+                            ifCharge: price > 0,
+                            charge: price,
+                            title: title,
+                            description: desc,
+                            startTime: startTime,
+                            duration: time
+                        };
+                        break;
+                    case 'password':
+                        var password = $('#password').val();
+                        data = {
+                            password: password,
+                            ifCharge: price > 0,
+                            charge: price,
+                            title: title,
+                            description: desc,
+                            startTime: startTime,
+                            duration: time
+                        };
+                        break;
+                }
+
+                function uploadCover(formData) {
+                    $.ajax({
+                        url: $.serverHttp + '/upload/thumbnail',
+                        headers: {
+                            Authorization: 'Bearer ' + _this.userInfo.token.token
+                        },
+                        type: 'post',
+                        data: formData,
+                        //attention!!!
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (data) {
+                            initReadyCourse();
+                            alert('创建成功');
+                        },
+                        error: function (error) {
+                            console.log('cover', error);
+                            alert(error.responseJSON.error_output);
+                        }
+                    });
+                }
+
+                $.ajax({
+                    url: $.serverHttp + '/3/stream/create',
+                    headers: {
+                        Authorization: 'Bearer ' + _this.userInfo.token.token
+                    },
+                    type: 'post',
+                    data: data,
+                    success: function (data) {
+                        var formData = new FormData();
+                        formData.append('streamId', data.streamId);
+
+                        var file = $('#filechooser')[0].files[0];
+
+                        imgSize = file.size;
+
+                        if (imgSize < 108 * 1024) {
+                            formData.append('pic', file);
+                            uploadCover(formData);
+                        } else {    // 图片压缩处理
+                            var reader = new FileReader(),
+                                maxWidth = 320,
+                                maxHeight = 180,
+                                suffix = file.name.substring(file.name.lastIndexOf('.') + 1);
+
+                            if (imgSize > 2 * 1024 * 1024) {
+                                maxWidth = 320;
+                                maxHeight = 180;
+                            }
+
+                            reader.onload = function (e) {
+                                var base64Img = e.target.result;
+                                //--执行resize。
+                                var _ir = ImageResizer({
+                                    resizeMode: 'auto',
+                                    dataSource: base64Img,
+                                    dataSourceType: 'base64',
+                                    maxWidth: maxWidth, //允许的最大宽度
+                                    maxHeight: maxHeight, //允许的最大高度。
+                                    onTmpImgGenerate: function (img) {
+                                    },
+                                    success: function (resizeImgBase64, canvas) {
+                                        var blob = dataURLtoBlob(resizeImgBase64);
+                                        formData.append('pic', blob, file['name']);
+                                        uploadCover(formData);
+                                    }
+                                });
+                            };
+                            reader.readAsDataURL(file);
+                        }
+
+                    },
+                    error: function (error) {
+                        console.log('stream', error);
+                        alert(error.responseJSON.error_output);
+                    }
+                });
+            });
+            var date = new Date(Date.now());
+            var month = (1 + date.getMonth()) + '';
+            if (month.length === 1) {
+                month = '0' + month;
+            }
+            var day = date.getDate() + '';
+            if (day.length === 1) {
+                day = '0' + day;
+            }
+            var timeNow = date.getFullYear() + '-' + month + '-' + day + 'T' + date.getHours() + ':' + date.getMinutes();
+            $('#courseStartTime').val(timeNow);
+
+        }
+
+        function upcourse(elem, n) {
+            var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            var oncegoon = false;//一次只能选择一个文件
+            var courseuploader = null;
+            var uploadId;
+            var uploadTime = 0;
+            var streamId = $(elem).attr('para1');
+            courseuploader = WebUploader.create({
+                // 选完文件后，是否自动上传。
+                auto: false,
+                // swf文件路径
+                swf: 'http://shouboke.tv/sbkUploadResource/js/Uploader.swf',
+                fileVal: 'doc', // 与服务器匹配
+                pick: {
+                    id: elem,
+                    label: '上传'
+                },
+                //threads:1,
+                chunked: true,
+                //server:'http://192.168.1.110:1337/files/multipart',
+                server: $.serverHttp + '/v4/stream/upload',
+                headers: {
+                    Authorization: 'Bearer ' + userInfo.token.token,
+                    'Access-Control-Allow-Origin': '*'
+                },
+                method: 'POST',
+                //    fileNumLimit:1,
+                accept: {
+                    title: '允许上传的文件类型',
+                    extensions: '',
+                    mimeTypes: 'video/3gpp,video/x-m4v,video/mp4,video/quicktime,video/mov'
+                }
+            });
+
+            courseuploader.on('beforeFileQueued', function (file) {
+                uploadTime = new Date().getTime();
+                //获取uploadId用于分片传输标记
+                getUploadId(file.name);
+                $('.upcourse').unbind('click');
+                var size = file.size / (1024 * 1024).toFixed(2);
+                if (file.type.indexOf('video') > -1 && size > 2048) {
+                    alert('上传的视频大小不能超过2048M,请重新选择。');
+                    return false;
+                } else {
+                    courseuploader.reset();
+                }
+            });
+            courseuploader.on('uploadBeforeSend', function (obj, formData, headers) {
+                formData.uploadId = uploadId;
+                formData.filename = formData.name;
+                if (!formData.chunks) {
+                    formData.chunks = '1';
+                    formData.chunk = '0';
+                }
+
+            });
+            // 文件上传过程中创建进度条实时显示。
+            courseuploader.on('uploadProgress', function (file, percentage) {
+                // var $li = $('.webuploader-pick'),
+                //     $percent = $li.find('.progress span');
+                // // 避免重复创建
+                // if (!$percent.length) {
+                //     $percent = $('<p class="progress"><span></span></p>')
+                //     .appendTo($li)
+                //     .find('span');
+                // }
+                // $percent.css('width', percentage * 100 + '%');
+                // $('.webuploader-pick').find('.progress').fadeIn();
+                // //上传过程中禁止再选择文件
+                // $('.upcourse').click(function (e) {
+                //     e.preventDefault();
+                // });
+                $('#progress' + n).html((percentage * 100).toFixed(2) + '%');
+            });
+            courseuploader.on('uploadError', function (file) {
+                $('#fileName').html('文件名');
+                $('.upcourse').unbind('click');
+                $('#progress' + n).html('');
+                alert('上传失败，请重试');
+            });
+            courseuploader.on('uploadSuccess', function (file, response) {
+                uploadTime = ((new Date().getTime() - uploadTime) / 1000 / 60).toFixed(0);
+                console.log('结束时间', formatDate(new Date().getTime(), 'HH:mm'));
+                console.log('共花费：' + uploadTime + '分钟');
+                console.log('response', response);
+                //上传完成后可再选择文件
+                $('.upcourse').unbind('click');
+                var $dd = '';
+                $dd += '<dd class="c clearfix">' +
+                    '<p class="p">' + response.filename + '</p>' +
+                    '<p class="e">' +
+                    '<input class="e_top delete" type="image" src="http://shouboke.tv/sbkUploadResource/img/delete.png" id="' + response.id + '">' +
+                    '</p>' +
+                    '</dd>';
+                $('#fileListContainer').prepend($dd);//向容器内第一个子节点前一位插入dom
+                $('.webuploader-pick').find('.progress').fadeOut();
+                if (!oncegoon) {
+                    oncegoon = true;
+                    var $span = '<span class="goonUpload">继续上传</span>';
+                    $('.webuploader-pick').append($span);
+                }
+            });
+            courseuploader.on('uploadComplete', function (file) {
+                console.log('uploadComplete', file);
+                $('#fileName').html('文件名');
+                $('.upcourse').unbind('click');
+                // initReadyCourse();
+                alert('上传成功');
+            });
+
+            //获取uploadId用于上传分片文件
+            function getUploadId(fileName) {
+                $.ajax({
+                    url: $.serverHttp + '/v4/stream/uploadId',
+                    headers: {
+                        Authorization: 'Bearer ' + userInfo.token.token
+                    },
+                    type: 'get',
+                    data: {
+                        filename: fileName,
+                        streamId: streamId
+                    },
+                    success: function (data) {
+                        uploadId = data.uploadId;
+                        console.log('uploadid:::' + uploadId);
+                        courseuploader.upload();
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        $('#progress' + n).html(error.responseText.error_output);
+                    }
+                });
+            }
+
+            function formatDate(time, format) {
+                var t = new Date(time);
+                var tf = function (i) {
+                    return (i < 10 ? '0' : '') + i;
+                };
+                return format.replace(/yyyy|MM|dd|HH|mm|ss/g, function (a) {
+                    switch (a) {
+                        case 'yyyy':
+                            return tf(t.getFullYear());
+                            break;
+                        case 'MM':
+                            return tf(t.getMonth() + 1);
+                            break;
+                        case 'mm':
+                            return tf(t.getMinutes());
+                            break;
+                        case 'dd':
+                            return tf(t.getDate());
+                            break;
+                        case 'HH':
+                            return tf(t.getHours());
+                            break;
+                        case 'ss':
+                            return tf(t.getSeconds());
+                            break;
+                    }
+                });
+            }
+
+        };
+
+        function initReadyCourse() {
+            $.ajax({
+                url: $.serverHttp + '/user/streams',
+                headers: {
+                    Authorization: 'Bearer ' + _this.userInfo.token.token
+                },
+                type: 'get',
+                data: {
+                    status: 'ready',
+                    page: 1,
+                    resultsPerPage: 20,
+                },
+                success: function (data) {
+                    $('#login_success').show();
+                    if (data.totalItems === 0) {
+                        $('.uploadCourseList').hide();
+                    } else {
+                    }
+                    _this.totalUploadItems = data.totalItems;  //初始化,获取一共有多少条数据
+                    _this.uploadPage = Math.ceil(_this.totalUploadItems / 20);  //每一页20条数据,计算一共有多少页
+                    _this.initUploadPage = (_this.initUploadPage - (_this.initUploadPage - 1)) + 1;  //第一次点击loadMore,加载第2页
+                    _this.currentUploadPage = _this.initUploadPage; //当前加载页,存为全局变量,便于修改以及用于请求,第一次点击是加载第2页。
+                    var hotList = '';
+                    var length = data.items.length;
+                    for (var i = 0; i < length; i++) {
+                        hotList += '<div class="myCourseItem clearfix">' +
+                            '<div class="div_1 clearfix">' +
+                            '<div class="son1" stream="' + data.items[i].streamId + '">' +
+                            '<div class="myCourseHover"><img src="assets/img/hover_play.png"></div>' +
+                            '</div>' +
+                            '<div class="son2">' +
+                            '<p class="p1">' + data.items[i].title + '</p>' +
+                            '<p id="' + 'progress' + i + '"></p>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="div_2 clearfix">' +
+                            //   href="http://54.223.51.182:6572/video/'+data.items[i].streamId+'/'+data.items[i].title+'"
+                            '<a id="' + 'upcourse' + i + '" class="upcourse" para1="' + data.items[i].streamId + '" para2="' + data.items[i].title + '"></a>' +
+                            //                                            '<p>125M</p>'+
+                            '</div>' +
+                            '</div>';
+                    }
+                    $('.uploadCourseList').html(hotList);
+                    //替换背景封面图片
+                    for (var i = 0; i < length; i++) {
+                        $('.list_hot .uploadCourseList .myCourseItem .div_1 .son1').eq(i).css('background-image', 'url(' + data.items[i].thumbnailUrl + ')');
+                        upcourse('#' + $('.list_hot .uploadCourseList .myCourseItem .div_2 #upcourse' + i).attr('id'), i);
+                    }
+
+                },
+                error: function (error) {
+                    console.log(error);
+                    swal("提示！", error.responseJSON.error_description, "error");
+                }
+            });
+        }
+    });
+
+</script>
+</body>
+</html>

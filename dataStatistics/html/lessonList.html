@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport"  content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="utf-8">
+    <title>平台课程</title>
+    <link rel="stylesheet" href="../css/mui.min.css"/>
+    <link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/icon-full.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/mui.picker.all.css" />
+    <style>
+        #block{
+            display: none;
+            background-color: #ffffff;
+        }
+        html{
+            background-color: #ffffff;
+        }
+        #dateChoose{
+            width: 3.75rem;
+            padding-left: .1rem;
+            height: .64rem;
+        }
+        #dateChoose>span{
+            line-height: .64rem;
+        }
+        #dateChoose>span:last-of-type{
+            margin-left: .2rem;
+        }
+        .line{
+            background-color: #DFDFE4;
+            height: 1px;
+            width: 3.75rem;
+        }
+        .item{
+            padding: .1rem;
+            height: .94rem;
+            width: 3.75rem;
+        }
+        .itemLeft{
+            width: 1.15rem;
+            height: .64rem;
+            float: left;
+        }
+        .itemRight{
+            width: 2.3rem;
+            height: .64rem;
+            margin-left: .1rem;
+            float: left;
+        }
+        .title{
+            float: left;
+            width: 2.3rem;
+            color: #393939;
+            font-size: .14rem;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+        .middle,.bottom{
+            float: left;
+            width: 2.3rem;
+            line-height: .22rem;
+        }
+        .userImg{
+            width: .16rem;
+            height: .16rem;
+            border-radius: 50%;
+            overflow: hidden;
+            float: left;
+            background-color: #AEB2C6;
+            margin-top: .03rem;
+        }
+        .userImg>img{
+            width: 100%;
+        }
+        .userName{
+            color: #AEB2C6;
+            font-size: .12rem;
+            margin-left: .1rem;
+            float: left;
+        }
+        .type{
+            float: right;
+            color: #AEB2C6;
+            font-size: .12rem;
+        }
+        .time{
+            color: #AEB2C6;
+            font-size: .12rem;
+            float: left;
+        }
+        .charge{
+            color: #39393A;
+            font-size: .14rem;
+            float: right;
+        }
+        .itemLeft>img{
+            width: 100%;
+        }
+        #more,#noMore{
+            height: .4rem;
+            line-height: .4rem;
+            text-align: center;
+        }
+        #noMore{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="block" class="mui-content">
+    <div id="dateChoose">
+        <span>2017-12</span>
+        <span attr="weekActive" style="font-size: .18rem" class="mui-icon mui-icon-arrowdown"></span>
+        <span>课程收入：22333</span>
+    </div>
+    <div class="line"></div>
+    <div id="list">
+    </div>
+    <div id="more">加载更多</div>
+    <div id="noMore">暂无数据</div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/mui.picker.all.js"></script>
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script src="https://cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+<script src="http://momentjs.cn/downloads/moment.min.js"></script>
+<script src="http://cdn.hcharts.cn/highcharts/modules/no-data-to-display.js"></script>
+<script>
+    load();
+    var url=_url+'/v4/stream/streamList';
+    var token=sessionStorage.getItem('token');
+    var selectedTime='2017-12';
+    var page=1;
+    function load(){//加载动画
+        el=Zepto.loading({
+            content:'正在加载中...'
+        })
+        el.on("loading:hide",function(){
+            mui('#block')[0].style.display='block';
+        });
+    }
+    getLesson('2017-12');
+    function getLesson(time){
+        $.ajax({
+            url:url+'?page='+page+'&resultsPerPage=20',
+            type:'get',
+            data:{
+                time:time
+            },
+            headers:{
+                access_token:token
+            },
+            success:function(data){
+                console.log(data);
+                page++;
+                $('#dateChoose span')[2].innerHTML='新增课程：'+data.totalItems;
+                var html='';
+                if(data.items.length<20){
+                    $('#more').hide();
+                    $('#noMore').show();
+                }
+                for(var i=0;i<data.items.length;i++){
+                    var type=''
+                    if(data.items[i].isPrivacy){
+                        type='团队课'
+                    }else{
+                        if(data.items[i].isPassword){
+                            type='密码课'
+                        }else{
+                            type='公开课'
+                        }
+                    }
+                    html +='<div class="item"> <div class="itemLeft"> <img src="'+data.items[i].thumbnailUrl+'" alt=""/> </div> <div class="itemRight"> <div class="title">'+data.items[i].title+'</div> <div class="middle"> <div class="userImg"><img src="'+data.items[i].avatarUrl+'" alt=""/></div> <div class="userName">'+data.items[i].displayName+'</div> <div class="type">'+type+'</div> </div> <div class="bottom"> <div class="time">开课时间: '+data.items[i].startTime.substr(0,10)+'</div> <div class="charge">¥ '+data.items[i].charge+'</div> </div> </div> </div><div class="line"></div>'
+                }
+                $('#list').html(html);
+                el.loading("hide");
+            },
+            error:function(){
+
+            }
+        })
+    }
+    function getMore(time){
+        $.ajax({
+            url:url+'?page='+page+'&resultsPerPage=20',
+            type:'get',
+            data:{
+                time:time
+            },
+            headers:{
+                access_token:token
+            },
+            success:function(data){
+                console.log(data);
+                page++;
+                $('#dateChoose span')[2].innerHTML='新增课程：'+data.totalItems;
+                for(var i=0;i<data.items.length;i++){
+                    var type=''
+                    if(data.items[i].isPrivacy){
+                        type='团队课'
+                    }else{
+                        if(data.items[i].isPassword){
+                            type='密码课'
+                        }else{
+                            type='公开课'
+                        }
+                    }
+                    $('#list')[0].innerHTML +='<div class="item"> <div class="itemLeft"> <img src="'+data.items[i].thumbnailUrl+'" alt=""/> </div> <div class="itemRight"> <div class="title">'+data.items[i].title+'</div> <div class="middle"> <div class="userImg"><img src="'+data.items[i].avatarUrl+'" alt=""/></div> <div class="userName">'+data.items[i].displayName+'</div> <div class="type">'+type+'</div> </div> <div class="bottom"> <div class="time">开课时间: '+data.items[i].startTime.substr(0,10)+'</div> <div class="charge">¥ '+data.items[i].charge+'</div> </div> </div> </div><div class="line"></div>'
+                }
+                if(data.items.length<20){
+                    $('#more').hide();
+                    $('#noMore').show();
+                }
+                moreEl.loading("hide");
+            },
+            error:function(){
+
+            }
+        })
+    }
+
+    mui("#block").on('tap','#dateChoose',function(){
+        var dtPicker = new mui.DtPicker({type:'month'});
+        dtPicker.show(function(data){
+            $('#dateChoose span')[0].innerHTML=data.value;
+            selectedTime=data.value;
+            page=1;
+            getLesson(data.value)
+        });
+    })
+    mui("#block").on('tap','#more',function(){
+        moreEl=Zepto.loading({
+            content:'正在获取更多...'
+        })
+        getMore(selectedTime);
+    })
+</script>
+</body>
+</html>

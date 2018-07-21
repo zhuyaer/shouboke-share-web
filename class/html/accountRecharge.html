@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport"  content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no" charset="utf-8">
+		<title>账户充值</title>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </title>
+		<link rel="stylesheet" href="../css/mui.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/accountRecharge.css"/>
+		<link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/frozen-min.css" rel="stylesheet">
+   		<link href="https://cdn.bootcss.com/FrozenUI/1.3.0/css/icon-full.css" rel="stylesheet">
+   		<link rel="stylesheet" href="../css/mui.picker.all.css" />
+	</head>
+	<body>
+		<div id="block" class="mui-content" style="display: none;">
+   			<div id="rechargeTab">
+   				<div id="tabHeader">
+   					<h4></h4>
+					<h5>当前剩余时长（分钟）</h5>
+   				</div>	
+   			</div>
+   			<div id="rechargeInfo">
+   				<div id="mineInfo">
+   					<span>充值帐号:</span>
+   					<span></span>
+   				</div>
+   				<div id="other">
+   					<input type="number" placeholder="给他人充值(手机号)" />
+   				</div>
+   			</div>
+   			<div id="rechargeNum">
+   				<input  onkeyup="canCharge(this)"  type="number" placeholder="请输入充值金额(元)"/>
+   			</div>
+   			<!--<h5>请选择充值方式</h5>-->
+   			<div id="rechargeType">
+   				<button id="weixin" class="mui-btn" onclick="wxClick()">充值</button>
+   				<!--<div id="card">
+   					<div>
+   						<img onclick="cardClick()" src="../img/Alipay.png"/>
+   					</div>
+   				</div>
+   				<div id="weixin">
+   					<div>
+   						<img onclick="wxClick()" src="../img/Alipay.png"/>
+   					</div>
+   				</div>-->
+   			</div>
+   			<h5 style="padding-bottom: .5rem;"><a href="./costStatement.html">费用说明</a></h5>
+   		</div>
+   		<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+		<script src="https://cdn.bootcss.com/FrozenUI/1.3.0/js/frozen.js"></script>
+		<script src="../js/common.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.all.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+		<script src="../js/accountRecharge.js"></script>
+		<script></script>
+	</body>
+</html>
+
+<!--https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx18e63e75d50cb458&redirect_uri=http://shouboke.tv%2fweChat_web_develop%2fclass%2fhtml%2fbindTel.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect-->
